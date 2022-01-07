@@ -2,92 +2,110 @@
 #include <iostream>
 #include <SFML/Graphics.hpp> 
 #include <SFML/Audio.hpp>
+#include"game.h"
+#include <string>
 
 using namespace sf;
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(800, 600), "SFML window");
+
+	//"Carte/fd/1.png"
+	Game g(10);
+	g.show();
+	//sf::RenderWindow window;
+	//window.create(sf::VideoMode(1600, 1000), "Survivor Lander");
+
+	
+/*
+    sf::RenderWindow window(sf::VideoMode(1600, 1000), "Survivor Lander");
 
  // Limit the framerate to 60 frames per second (this step is optional)
 /// window.setFramerateLimit(60);
-///
+///1600, 1000
 /// // The main loop - ends as soon as the window is closed
 
-	 /*sf::SoundBuffer buffer;
-	 buffer.loadFromFile("rad.wav");
+	 sf::SoundBuffer buffer;
+	 buffer.loadFromFile("intro1.wav");
 
 	 sf::Sound sound;
 	 sound.setBuffer(buffer);
 	 sound.play();
 	 sound.setLoop(true);
-	*/
+	
 	int mode=2;
 	int ok=0;
+	int menu=0;
 	//Bouton
-	sf::RectangleShape bouton(sf::Vector2f(80, 60));
-	bouton.setPosition(700,20);
+	sf::RectangleShape bouton(sf::Vector2f(600, 1000));
+	bouton.setPosition(1000,0);
 	
-	//Bouton2
-	sf::RectangleShape bouton2(sf::Vector2f(170, 80));
-	bouton2.setPosition(600,100);
-
-	//Bouton3
-	sf::RectangleShape bouton3(sf::Vector2f(170, 80));
-	bouton3.setPosition(300,200);
-	bouton3.setFillColor(sf::Color::White);
+	sf::RectangleShape bouton2(sf::Vector2f(1600, 1000));
+	bouton2.setFillColor(sf::Color::White);
 	
-	//Batiment
-	sf::RectangleShape bouton4(sf::Vector2f(170, 80));
-	bouton4.setPosition(300,200);
-	bouton4.setFillColor(sf::Color::Red);
-	int posX=0;
-	int poxY=0;
-	int click=0;
+	//LES MAPS
 	
-	//Vaisseau
-	sf::Texture image;
-	image.loadFromFile("df.png");
-	sf::Sprite sprite(image);
-	sprite.setScale(0.15f,0.15f);
-	sprite.setOrigin(335,186);
+	int compteur=1;
 	
-	//Fond
-	sf::Texture image2;
-	image2.loadFromFile("back.jpg");
-	sf::Sprite sprite2(image2);
-	sprite2.setScale(1.4f,1.0f);
+	sf::Texture carte1;
+	carte1.loadFromFile("Carte/fd/1.png");
+	sf::Sprite sprite11(carte1);
+	sprite11.setScale(0.62f,0.55f);
 	
-	//Fond-menu
-	sf::Texture image5;
-	image5.loadFromFile("ds.jpg");
-	sf::Sprite sprite5(image5);
-	sprite5.setScale(0.45f,0.6f);
+	sf::Texture carte2;
+	carte2.loadFromFile("Carte/fd/2.png");
+	sf::Sprite sprite12(carte2);
+	sprite12.setScale(0.62f,0.55f);
 	
-	//Station Spatiale
-	sf::Texture image3;
-	image3.loadFromFile("gf.png");
-	sf::Sprite sprite3(image3);
-	sprite3.setScale(0.2f,0.2f);
-	sprite3.setPosition(350,400);
+	sf::Texture carte3;
+	carte3.loadFromFile("Carte/fd/3.png");
+	sf::Sprite sprite13(carte3);
+	sprite13.setScale(0.62f,0.55f);
 	
-	//Station intérieur
-	sf::Texture image4;
-	image4.loadFromFile("Sp.jpg");
-	sf::Sprite sprite4(image4);
-	sprite4.setScale(0.5f,0.5f);
+	sf::Texture carte4;
+	carte4.loadFromFile("Carte/fd/4.png");
+	sf::Sprite sprite14(carte4);
+	sprite14.setScale(0.62f,0.55f);
 	
-	sf::Vector2f localPosition2 = sprite.getOrigin();
-	std::cout <<localPosition2.x <<std::endl;
+	sf::Texture carte5;
+	carte5.loadFromFile("Carte/fd/5.png");
+	sf::Sprite sprite15(carte5);
+	sprite15.setScale(0.62f,0.55f);
+	
+	sf::Texture carte6;
+	carte6.loadFromFile("Carte/fd/6.png");
+	sf::Sprite sprite16(carte6);
+	sprite16.setScale(0.62f,0.55f);
+	
+	sf::Texture carte7;
+	carte7.loadFromFile("Carte/fd/7.png");
+	sf::Sprite sprite17(carte7);
+	sprite17.setScale(0.62f,0.55f);
+	
+	sf::Texture carte8;
+	carte8.loadFromFile("Carte/fd/8.png");
+	sf::Sprite sprite18(carte8);
+	sprite18.setScale(0.62f,0.55f);
+	
+	
+	sf::Texture pres;
+	pres.loadFromFile("Carte/menu.png");
+	sf::Sprite sprite19(pres);
+	sprite19.setScale(1.0f,1.0f);
+	sprite19.setPosition(50,-150);
+	
+	sf::Texture pres2;
+	pres2.loadFromFile("Carte/terre.png");
+	sf::Sprite sprite20(pres2);
+	sprite20.setScale(0.8f,0.8f);
+	sprite20.setPosition(550,400);
 
 	int carb=500;
 	sf::Font font;
 	font.loadFromFile("arial.ttf");
-	sf::Text text("Carburant restant :"+ std::to_string(carb),font);
 	//text.setString("Salut les zéros !"); // Texte
 	//text.setFont(font); // Fonte
-	text.setCharacterSize(20); // Taille de police
-	text.setColor(sf::Color::White);
+
 	
 	//Texte bouton
 	sf::Text text2("Station",font);
@@ -102,12 +120,6 @@ int main()
 	text3.setPosition(600,120);
 	
 	
-	//Texte bouton 3
-	sf::Text text4("Jouer",font);
-	text4.setCharacterSize(30); // Taille de police
-	text4.setColor(sf::Color::Red);
-	text4.setPosition(350,220);
-	
 	sf::CircleShape circle(10);
 	sf::Vector2i localPosition = sf::Mouse::getPosition(window);
 	int x=100;
@@ -115,6 +127,53 @@ int main()
 	int MouseX=0;
 	int MouseY=0;
 
+//55 de différence en x
+	sf::Vector2i coord[100];
+				//213 pour ligne 1
+	int difX=58;
+	int difY=45;
+	int valX[]={840,456,424,335,304,277,304,277,304};
+	int valY=213;
+	for(int i=0;i<100;i++){
+		if(i<4){
+			coord[i]=sf::Vector2i(valX[0], 215);
+			valX[0]+=difX;
+		}
+		if(i>3 && i<19){
+			coord[i]=sf::Vector2i(valX[1], 215+difY);			
+			valX[1]+=difX;
+		}
+		if(i>18 && i<30){
+			coord[i]=sf::Vector2i(valX[2], 215+2*difY);			
+			valX[2]+=difX;
+		}
+		if(i>29 && i<38){
+			coord[i]=sf::Vector2i(valX[3], 215+3*difY);			
+			valX[3]+=difX;
+		}
+		if(i>37 && i<48){
+			coord[i]=sf::Vector2i(valX[4], 215+4*difY);			
+			valX[4]+=difX;
+		}
+		if(i>47 && i<57){
+			coord[i]=sf::Vector2i(valX[5], 215+5*difY);			
+			valX[5]+=difX;
+		}
+		if(i>56 && i<67){
+			coord[i]=sf::Vector2i(valX[6], 215+6*difY);			
+			valX[6]+=difX;
+		}
+		if(i>66 && i<78){
+			coord[i]=sf::Vector2i(valX[7], 215+7*difY);			
+			valX[7]+=difX;
+		}
+		if(i>77 && i<87){
+			coord[i]=sf::Vector2i(valX[8], 215+8*difY);			
+			valX[8]+=difX;
+		}
+		
+
+	}	
 
 
 
@@ -137,76 +196,57 @@ int main()
       		localPosition = sf::Mouse::getPosition(window);
       		MouseX=localPosition.x;
       		MouseY=localPosition.y;
+      		
+      		std::cout << "x: " << MouseX << std::endl;
+      		std::cout << "y: " << MouseY << std::endl << std::endl;
     		break;
     	case sf::Event::MouseButtonPressed:
     		
-    		if(mode==1){
-    			if(MouseX>600 && MouseY>100 && MouseX<770 && MouseY<180){
-    				carb=500;
+    		if(mode==2){
+    			if(MouseX>677 && MouseY>480 && MouseX<885 && MouseY<665){
+    				mode=3;
 				}
-			}
-			if(mode==2){
+			}else if(mode==3){
 				
-				if(click==0 && MouseX>posX && MouseY>posY && MouseX<(posX+170) && MouseY<(posY+80)){
-					click=1;
-					
-				}else if(click==1 && MouseX>posX && MouseY>posY && MouseX<(posX+170) && MouseY<(posY+80)){
-					click=0;
+				
+
+				//750, 535 // longueur 34 en x //hauteur de 22 en y
+				for(int i=0;i<100;i++){
+					if(MouseX>coord[i].x-20 && MouseY>coord[i].y-12	 && MouseX<coord[i].x+20 && MouseY<coord[i].y+12){
+    					std::cout <<i<< std::endl;
+    					//menu=1;
+    					//compteur+=1;
+					}		
 				}
-    			if(MouseX>300 && MouseY>200 && MouseX<470 && MouseY<280){
-    				carb=500;
-    				mode=0;
+				if(MouseX>750-17 && MouseY>535-11 && MouseX<750+17 && MouseY<535+11){
+    				std::cout <<"Salut"<< std::endl;
+    				//menu=1;
+    				compteur+=1;
 				}
 			}
-    		if(ok==1){
-    			//std::cout <<MouseX<< std::endl;
-    			//std::cout <<MouseY<< std::endl;
-    			if(MouseX>700 && MouseY>20 && MouseX<780 && MouseY<80){
-    				if(mode==0){
-    					mode=1;
-					}else{
-						mode=0;
-					}
-				}    			
-			}
+		
     		break;
     	
    		case sf::Event::KeyPressed:
    			//std:: cout << "He" << std::endl;
-   			if(mode==0){
+   			if(mode==0 || mode==3){
 			   
    			switch(event.key.code){
    				
-   				case sf::Keyboard::Z :
-   					y=y-10;
-   					sprite.setRotation(180);
-   					carb-=1;
-   					//window.close();
-   					//std:: cout << "Hi";
-   					break;
-   				case sf::Keyboard::S :
-   					y=y+10;
-   					sprite.setRotation(0);
-   					//window.close();
-   					//std:: cout << "Hi";
-   					carb-=1;
-   					break;
-   				case sf::Keyboard::Q :
-   					x=x-10;
-   					sprite.setRotation(90);
-   					carb-=1;
-   					//window.close();
-   					//std:: cout << "Hi";
-   					break;
-   				case sf::Keyboard::D :
-   					x=x+10;
-   					sprite.setRotation(-90);
-   					//window.close();
-   					//std:: cout << "Hi";
-   					carb-=1;
+   				
+   				case sf::Keyboard::A :
+   					if(menu==0){
+   						menu=1;
+					   }else{
+					   	menu=0;
+					   }
    					break;
    				case sf::Keyboard::Space :
-   					mode=2;
+   					compteur+=1;
+   					if(compteur==9){
+   						compteur=1;
+					   }
+					   
    					break;
 			   }
 		}
@@ -215,46 +255,46 @@ int main()
 
    // Clear the whole window before rendering a new frame
    window.clear();
-   	text.setString("Carburant restant :"+ std::to_string(carb));
 ///    // Draw some graphical entities
 
 	if(mode==0){
 	
-	sprite.setPosition(x,y);
-	circle.setPosition(MouseX,MouseY);
- 	window.draw(circle);
- 	window.draw(sprite2);
- 	window.draw(sprite);
- 	window.draw(sprite3);
- 	window.draw(text);
- 	
- 	if(x>350 && y>400 && x<450 && y<500){
- 		window.draw(bouton);
- 		text2.setString("Station");
- 		window.draw(text2);
- 		ok=1;
-	 }
-	 else{
-	 	ok=0;
-	 }
 	 
- }else if(mode==1){
-	window.draw(sprite4);
- 	window.draw(bouton);
- 	window.draw(bouton2);
- 	text2.setString("Vaisseau");
- 	window.draw(text2);
- 	window.draw(text3);
  }else if(mode==2){
- 	window.draw(sprite5);
- 	window.draw(bouton3);
- 	window.draw(text4);
- 	if(click==1){
- 		bouton4.setPosition(MouseX,MouseY);	
- 		posX=MouseX;
- 		posY=MouseY;
+	 window.draw(bouton2);
+	 window.draw(sprite19);
+	 window.draw(sprite20);
+ }else if(mode==3){
+ 	switch(compteur){
+ 		case 1:
+ 			window.draw(sprite11);
+ 			break;
+ 		case 2:
+ 			window.draw(sprite12);
+ 			break;
+ 		case 3:
+ 			window.draw(sprite13);
+ 			break;
+ 		case 4:
+ 			window.draw(sprite14);
+ 			break;
+ 		case 5:
+ 			window.draw(sprite15);
+ 			break;
+ 		case 6:
+ 			window.draw(sprite16);
+ 			break;
+ 		case 7:
+ 			window.draw(sprite17);
+ 			break;
+ 		case 8:
+ 			window.draw(sprite18);
+ 			break;
 	 }
- 	window.draw(bouton4);
+
+	 if(menu==1){
+	 	window.draw(bouton);
+	 }
  }
 
  	
@@ -263,4 +303,5 @@ int main()
    window.display();
  }
  return 0;
+ */
 }
