@@ -2,13 +2,19 @@
 #include <iostream>
 #include <SFML/Graphics.hpp> 
 #include <SFML/Audio.hpp>
-#include"game.h"
+#include "game.h"
 #include <string>
 
 using namespace sf;
 
 int main()
 {
+	sf::Music music;
+	if (!music.openFromFile("Assets_visuels/Cheilinus_Undulatus.wav"))
+    return -1; // error
+	music.setLoop(true);
+	music.setVolume(100);
+	music.play();
 
 	//"Carte/fd/1.png"
 	Game g(10);

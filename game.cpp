@@ -2,7 +2,7 @@
 
 Game::Game(int a){
 	this->life=a;
-	this->window.create(sf::VideoMode(1600, 1000), "Survivor Lander");
+	this->window.create(sf::VideoMode(1600, 1000), "Last Earth");
 	this->chargementCartes();
 	
 	
@@ -11,13 +11,19 @@ void Game::show(){
 
 	sf::Texture texture;
 	sf::Texture texture2;
+	sf::Texture texture3;
+	sf::Texture texture4;
 	std::size_t i = 1;
 	std::string chemin="Carte/fd/";
 	std::string ext=".png";
 	std::string numero;
 	std::string nomComplet;
+
 	sf::Sprite s;
 	sf::Sprite button;
+	sf::Sprite s2;
+	sf::Sprite Regles_du_jeu;
+
 	bool flag_escape = false;
 
 	while (this->window.isOpen())
@@ -46,33 +52,54 @@ void Game::show(){
            		}
            		if(i<8 && flag_escape == false){
            			i++;
-           			numero=std::to_string(i);
+           			}
+    			if(flag_escape == false){
+    				numero=std::to_string(i);
 					nomComplet=chemin+numero+ext;
            			texture.loadFromFile(nomComplet);
     				s.setTexture(texture);
    					s.setScale(0.62f,0.55f);
+
+   					texture2.loadFromFile("Assets_visuels/villageois.png");
+   					s2.setTexture(texture2);
+   					s2.setScale(0.65f,0.65f);
+   					s2.setPosition(1400,0);
+
     				window.draw(s);
+    				window.draw(s2);
     				this->window.display();
-    				this->window.clear();}
+    				this->window.clear();
+    			}
            		
            		
            		break;
            }
            if (event.type == sf::Event::KeyPressed)
 			{
+				//écran de pause
     		if (event.key.code == sf::Keyboard::Escape)
     			{
+
     				if(flag_escape == false){
     					flag_escape = true;
+
         				texture.loadFromFile("Carte/menu.png");
         				s.setTexture(texture);
    						s.setScale(0.70f,0.70f);
+
    						texture2.loadFromFile("Carte/terre.png");
    						button.setTexture(texture2);
    						button.setScale(0.7f,0.7f);
    						button.setPosition(600,450);
+
+   						texture3.loadFromFile("Assets_visuels/bouton_planete.png");
+   						s2.setTexture(texture3);
+   						s2.setScale(0.7f,0.7f);
+   						s2.setPosition(880,630);
     					window.draw(s);
     					window.draw(button);
+    					window.draw(s2);
+
     					this->window.display();}
     				else{
     					flag_escape = false;
@@ -123,10 +150,18 @@ void Game::chargementCartes(){
 		this->window.clear();
 	}*/
 	sf::Texture texture;
+	sf::Texture texture2;
+	sf::Sprite s2;
+
     texture.loadFromFile("Carte/fd/1.png");
     sf::Sprite s(texture);
     s.setScale(0.62f,0.55f);
+    texture2.loadFromFile("Assets_visuels/villageois.png");
+   	s2.setTexture(texture2);
+   	s2.setScale(0.65f,0.65f);
+    s2.setPosition(1400,0);
     window.draw(s);
+    window.draw(s2);
     this->window.display();
     this->window.clear();
    
