@@ -6,11 +6,12 @@
 class Personnage{
 	public:
 
-		
+		virtual void reproduction(Personnage& p)=0;
 		
 
 
 	private:
+		std::size_t Force;
 		
 		
 
