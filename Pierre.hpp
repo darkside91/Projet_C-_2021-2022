@@ -8,7 +8,7 @@ class Pierre:public Ressources{
 	public:
 
 		
-
+		Pierre(){};
 
 	private:
 		sf::Texture texture;

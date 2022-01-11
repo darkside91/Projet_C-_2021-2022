@@ -7,7 +7,7 @@
 class Eau:public Ressources{
 	public:
 
-		
+		Eau(){};
 
 
 	private:

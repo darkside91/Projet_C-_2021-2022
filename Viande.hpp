@@ -7,7 +7,7 @@
 class Viande:public Ressources{
 	public:
 
-		
+		Viande(){};
 
 
 	private:

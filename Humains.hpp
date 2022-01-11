@@ -2,10 +2,13 @@
 #include <cstdlib>
 #include <iostream>
 #include <SFML/Graphics.hpp> 
+#include "Personnage.hpp"
 
-class Humains{
+class Humains:public Personnage{
 	public:
 
+		Humains();
+		
 		
 		
 

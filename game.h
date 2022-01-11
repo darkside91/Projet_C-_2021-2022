@@ -10,6 +10,11 @@
 #include "MutantsF_minus.hpp"
 #include "Mutants_pm.hpp"
 #include "Cases.hpp"
+#include "Pierre.hpp"
+#include "Bois.hpp"
+#include "Eau.hpp"
+#include "Viande.hpp"
+#include "Legumes.hpp"
 
 class Game{
 	private:
@@ -23,6 +28,12 @@ class Game{
 		std::vector<Mutants_pm> PM;
 		std::vector<MutantsF_minus> F_minus;
 		std::vector<MutantsF_plus> F_plus;
+		std::vector<Eau> E;
+		std::vector<Bois> B;
+		std::vector<Pierre> P;
+		std::vector<Viande> V;
+		std::vector<Legumes> L;
+
 		//vecteur de cases
 		std::vector<Cases> C;
 

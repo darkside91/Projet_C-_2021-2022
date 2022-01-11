@@ -8,7 +8,7 @@ class Bois:public Ressources{
 	public:
 
 		
-
+		Bois(){};
 
 	private:
 		sf::Texture texture;

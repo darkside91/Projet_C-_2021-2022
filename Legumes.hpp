@@ -8,7 +8,7 @@ class Legumes:public Ressources{
 	public:
 
 		
-
+		Legumes(){};
 
 	private:
 		sf::Texture texture;

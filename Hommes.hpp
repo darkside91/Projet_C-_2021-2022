@@ -6,7 +6,8 @@
 
 class Hommes:public Humains{
 	public:
-
+		
+		Hommes():Humains(){};
 		
 		
 
