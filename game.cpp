@@ -3,7 +3,8 @@
 Game::Game(int a){
 	this->life=a;
 	this->window.create(sf::VideoMode(1600, 1000), "Last Earth");
-	this->chargementCartes();
+
+	//this->chargementCartes();
 
 	H.push_back(Hommes());
 	F.push_back(Femmes());
@@ -18,6 +19,8 @@ Game::Game(int a){
 	
 }
 void Game::show(){
+
+	this->chargementCartes();
 
 	sf::Texture texture;
 	sf::Texture texture2;
@@ -36,6 +39,7 @@ void Game::show(){
 	sf::Sprite Regles_du_jeu;
 
 	bool flag_escape = false;
+	bool flag_debut = true;
 
 	while (this->window.isOpen())
  	{
@@ -63,10 +67,10 @@ void Game::show(){
            		//pour les tests
            		std::cout << "mouse x: " << event.mouseButton.x << std::endl;
         		std::cout << "mouse y: " << event.mouseButton.y << std::endl;
-           		if(i<8 && flag_escape == false){
+           		if(i<8 && flag_escape == false ){
            			i++;
            			}
-    			if(flag_escape == false){
+    			if(flag_escape == false ){
     				numero=std::to_string(i);
 					nomComplet=chemin+numero+ext;
            			texture.loadFromFile(nomComplet);
@@ -97,11 +101,12 @@ void Game::show(){
            if (event.type == sf::Event::KeyPressed)
 			{
 				//écran de pause
-    		if (event.key.code == sf::Keyboard::Escape)
+    		if (event.key.code == sf::Keyboard::Escape )
     			{
 
     				if(flag_escape == false){
     					flag_escape = true;
+    					
 
         				texture.loadFromFile("Carte/menu.png");
         				s.setTexture(texture);
@@ -189,6 +194,7 @@ void Game::chargementCartes(){
 	sf::Texture texture4; //1.png
 	sf::Texture texture5; //0.png
 	sf::Texture texture6; // 2.Png
+	sf::Texture texture7; 
 
 
 	sf::Sprite s2;
@@ -203,6 +209,7 @@ void Game::chargementCartes(){
 	sf::Sprite V3;
 	sf::Sprite V4;
 	sf::Sprite V5;
+	sf::Sprite press_escape;
 
     texture.loadFromFile("Carte/fd/1.png");
     sf::Sprite s(texture);
@@ -254,6 +261,10 @@ void Game::chargementCartes(){
    	V5.setScale(1.5f,1.5f);
    	V5.setPosition(1688,636);
 
+   	texture7.loadFromFile("Assets_visuels/press_escape.png");
+   	press_escape.setTexture(texture7);
+   	press_escape.setPosition(500,100);
+
     window.draw(s);
     window.draw(s2);
     window.draw(s3);
@@ -268,6 +279,7 @@ void Game::chargementCartes(){
     window.draw(V3);
     window.draw(V4);
     window.draw(V5);
+    window.draw(press_escape);
     this->window.display();
     this->window.clear();
    
