@@ -22,6 +22,7 @@ void Game::show(){
 	sf::Sprite s;
 	sf::Sprite button;
 	sf::Sprite s2;
+	sf::Sprite s3;
 	sf::Sprite Regles_du_jeu;
 
 	bool flag_escape = false;
@@ -65,8 +66,14 @@ void Game::show(){
    					s2.setScale(0.65f,0.65f);
    					s2.setPosition(1400,0);
 
+   					texture3.loadFromFile("Assets_visuels/ressources.png");
+   					s3.setTexture(texture3);
+   					s3.setScale(0.65f,0.65f);
+   					s3.setPosition(1400,500);
+
     				window.draw(s);
     				window.draw(s2);
+    				window.draw(s3);
     				this->window.display();
     				this->window.clear();
     			}
@@ -106,7 +113,20 @@ void Game::show(){
     					texture.loadFromFile(nomComplet);
     					s.setTexture(texture);
    						s.setScale(0.62f,0.55f);
+
+   						texture2.loadFromFile("Assets_visuels/villageois.png");
+   						s2.setTexture(texture2);
+   						s2.setScale(0.65f,0.65f);
+   						s2.setPosition(1400,0);
+
+   						texture3.loadFromFile("Assets_visuels/ressources.png");
+   						s3.setTexture(texture3);
+   						s3.setScale(0.65f,0.65f);
+   						s3.setPosition(1400,500);
+
     					window.draw(s);
+    					window.draw(s2);
+    					window.draw(s3);
     					this->window.display();
     				}
         
@@ -151,8 +171,9 @@ void Game::chargementCartes(){
 	}*/
 	sf::Texture texture;
 	sf::Texture texture2;
+	sf::Texture texture3;
 	sf::Sprite s2;
-
+	sf::Sprite s3;
     texture.loadFromFile("Carte/fd/1.png");
     sf::Sprite s(texture);
     s.setScale(0.62f,0.55f);
@@ -160,8 +181,13 @@ void Game::chargementCartes(){
    	s2.setTexture(texture2);
    	s2.setScale(0.65f,0.65f);
     s2.setPosition(1400,0);
+    texture3.loadFromFile("Assets_visuels/ressources.png");
+   	s3.setTexture(texture3);
+   	s3.setScale(0.65f,0.65f);
+   	s3.setPosition(1400,500);
     window.draw(s);
     window.draw(s2);
+    window.draw(s3);
     this->window.display();
     this->window.clear();
    
