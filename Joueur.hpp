@@ -7,6 +7,7 @@ class Joueur{
 	public:
 
 		Joueur();
+		sf::Sprite getSprite() const { return s_joueur;}
 
 
 	private:

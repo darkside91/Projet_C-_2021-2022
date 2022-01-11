@@ -4,6 +4,7 @@ Game::Game(int a){
 	this->life=a;
 	this->window.create(sf::VideoMode(1600, 1000), "Last Earth");
 	this->chargementCartes();
+
 	
 	
 }
@@ -48,9 +49,11 @@ void Game::show(){
            				flag_escape = false;
            			}
            			//if(event.mouseButton.x)
-           			//std::cout << "mouse x: " << event.mouseButton.x << std::endl;
-        			//std::cout << "mouse y: " << event.mouseButton.y << std::endl;
+           			
            		}
+           		//pour les tests
+           		std::cout << "mouse x: " << event.mouseButton.x << std::endl;
+        		std::cout << "mouse y: " << event.mouseButton.y << std::endl;
            		if(i<8 && flag_escape == false){
            			i++;
            			}
@@ -74,6 +77,7 @@ void Game::show(){
     				window.draw(s);
     				window.draw(s2);
     				window.draw(s3);
+    				window.draw(j.getSprite());
     				this->window.display();
     				this->window.clear();
     			}
@@ -127,6 +131,7 @@ void Game::show(){
     					window.draw(s);
     					window.draw(s2);
     					window.draw(s3);
+    					window.draw(j.getSprite());
     					this->window.display();
     				}
         
@@ -185,9 +190,11 @@ void Game::chargementCartes(){
    	s3.setTexture(texture3);
    	s3.setScale(0.65f,0.65f);
    	s3.setPosition(1400,500);
+
     window.draw(s);
     window.draw(s2);
     window.draw(s3);
+    window.draw(j.getSprite());
     this->window.display();
     this->window.clear();
    
