@@ -261,9 +261,9 @@ void Game::chargementCartes(){
    	V5.setScale(1.5f,1.5f);
    	V5.setPosition(1688,636);
 
-   	texture7.loadFromFile("Assets_visuels/press_escape.png");
-   	press_escape.setTexture(texture7);
-   	press_escape.setPosition(500,100);
+   	//texture7.loadFromFile("Assets_visuels/press_escape.png");
+   	//press_escape.setTexture(texture7);
+   	//press_escape.setPosition(500,100);
 
     window.draw(s);
     window.draw(s2);
