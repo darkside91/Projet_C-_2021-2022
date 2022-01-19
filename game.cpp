@@ -259,8 +259,8 @@ void Game::show(){
 	sf::Texture texture13; //8
 	sf::Texture texture14; //9
 
-
 	std::size_t i = 1;
+	std::size_t tour =0; //compteur de tours
 	std::string chemin="Carte/fd/";
 	std::string ext=".png";
 	std::string numero;
@@ -353,13 +353,13 @@ void Game::show(){
 	bool flag_escape = false;
 	bool flag_debut = true;
 	bool flag_end = false;
+	bool win = true; //gagner ou perdu
 
 	while (this->window.isOpen())
  	{
     // Event processing
     	sf::Event event;
 
-    
    		while (this->window.pollEvent(event))
    		{
    			switch (event.type){
@@ -368,160 +368,98 @@ void Game::show(){
            			this->window.close();
            			break;
 
-           		case sf::Event::MouseButtonPressed:
+           		case sf::Event::MouseButtonPressed :
            			//appuyer sur le bouton planète sur l'écran de pause
            			if(flag_escape == true){
            				if(event.mouseButton.x < 875 && event.mouseButton.x>726 && event.mouseButton.y < 686 && event.mouseButton.y > 521){
            					flag_escape = false;
            				}
            			
-           			
            			}
            			//pour les tests
            			std::cout << "mouse x: " << event.mouseButton.x << std::endl;
         			std::cout << "mouse y: " << event.mouseButton.y << std::endl;
-           			
-    			/*if(flag_escape == false ){
-    				numero=std::to_string(i);
-					nomComplet=chemin+numero+ext;
-           			texture.loadFromFile(nomComplet);
-    				s.setTexture(texture);
-   					s.setScale(0.62f,0.55f);
-
-   					texture2.loadFromFile("Assets_visuels/villageois.png");
-   					s2.setTexture(texture2);
-   					s2.setScale(0.65f,0.65f);
-   					s2.setPosition(1400,0);
-
-   					texture3.loadFromFile("Assets_visuels/ressources.png");
-   					s3.setTexture(texture3);
-   					s3.setScale(0.65f,0.65f);
-   					s3.setPosition(1400,500);
-
-    				window.draw(s);
-    				window.draw(s2);
-    				window.draw(s3);
-    				window.draw(j.getSprite());
-    				this->window.display();
-    				this->window.clear();
-    			}*/
-           		
-           		
-           		break;
+           			break;
            }
-           if (event.type == sf::Event::KeyPressed)
-			{
 
-				//écran de pause
-    		if (event.key.code == sf::Keyboard::Escape )
-    			{
+           if (event.type == sf::Event::KeyPressed){
 
-    				if(flag_escape == false){
-    					flag_escape = true;
-    					
-
-        				/*texture.loadFromFile("Carte/menu.png");
-        				s.setTexture(texture);
-   						s.setScale(0.70f,0.70f);
-
-   						texture2.loadFromFile("Carte/terre.png");
-   						button.setTexture(texture2);
-   						button.setScale(0.7f,0.7f);
-   						button.setPosition(600,450);
-
-   						texture3.loadFromFile("Assets_visuels/bouton_planete.png");
-   						s2.setTexture(texture3);
-   						s2.setScale(0.7f,0.7f);
-   						s2.setPosition(880,630);
-    					window.draw(s);
-    					window.draw(button);
-    					window.draw(s2);
-
-    					this->window.display();*/}
-    				/*else{
-    					flag_escape = false;
-    					numero=std::to_string(i);
-						nomComplet=chemin+numero+ext;
-    					texture.loadFromFile(nomComplet);
-    					s.setTexture(texture);
-   						s.setScale(0.62f,0.55f);
-
-   						texture2.loadFromFile("Assets_visuels/villageois.png");
-   						s2.setTexture(texture2);
-   						s2.setScale(0.65f,0.65f);
-   						s2.setPosition(1400,0);
-
-   						texture3.loadFromFile("Assets_visuels/ressources.png");
-   						s3.setTexture(texture3);
-   						s3.setScale(0.65f,0.65f);
-   						s3.setPosition(1400,500);
-
-    					window.draw(s);
-    					window.draw(s2);
-    					window.draw(s3);
-    					window.draw(j.getSprite());
-    					this->window.display();
-    				}*/
-        
+			//écran de pause
+    		if (event.key.code == sf::Keyboard::Escape ){
+				if(flag_escape == false){
+    				flag_escape = true;
     			}
+    		}
 
-    			if (event.key.code == sf::Keyboard::Z){
-    				if(i<8){
-    					i++;
-    				}
-    				j.setX(j.getX()-12);
-    				j.setY(j.getY()-38);
-    				j.newPosition();
-    				
 
+    		if (event.key.code == sf::Keyboard::Z){
+    			if(i<8){
+    				i++;
     			}
-    			if (event.key.code == sf::Keyboard::E ){
-    				if(i<8){
-    					i++;
-    				}
-    				j.setX(j.getX()+45);
-    				j.setY(j.getY()-40);
-    				j.newPosition();
+    			j.setX(j.getX()-12);
+    			j.setY(j.getY()-38);
+    			j.newPosition();
+    			tour++;
 
-
+    		}
+    		if (event.key.code == sf::Keyboard::E ){
+    			if(i<8){
+    				i++;
     			}
-    			if (event.key.code == sf::Keyboard::D ){
-    				if(i<8){
-    					i++;
-    				}
-    				j.setX(j.getX()+75);
-    				j.setY(j.getY()+10);
-    				j.newPosition();
+    			j.setX(j.getX()+45);
+    			j.setY(j.getY()-40);
+    			j.newPosition();
+    			tour++;
+    		}
+    		if (event.key.code == sf::Keyboard::D ){
+    			if(i<8){
+    				i++;
     			}
-    			if (event.key.code == sf::Keyboard::X ){
-    				if(i<8){
-    					i++;
-    				}
-    				j.setX(j.getX()+45);
-    				j.setY(j.getY()+40);
-    				j.newPosition();
-
+    			j.setX(j.getX()+75);
+    			j.setY(j.getY()+10);
+    			j.newPosition();
+    			tour++;
+    		}
+    		if (event.key.code == sf::Keyboard::X ){
+    			if(i<8){
+    				i++;
     			}
-    			if (event.key.code == sf::Keyboard::W ){
-    				if(i<8){
-    					i++;
-    				}
-    				j.setX(j.getX()-5);
-    				j.setY(j.getY()+50);
-    				j.newPosition();
+    			j.setX(j.getX()+45);
+    			j.setY(j.getY()+40);
+    			j.newPosition();
+    			tour++;
+
+    		}
+    		if (event.key.code == sf::Keyboard::W ){
+    			if(i<8){
+    				i++;
     			}
-    			if (event.key.code == sf::Keyboard::Q ){
-    				if(i<8){
-    					i++;
-    				}
-    				j.setX(j.getX()-40);
-    				j.setY(j.getY()+0);
-    				j.newPosition();
+    			j.setX(j.getX()-5);
+    			j.setY(j.getY()+50);
+    			j.newPosition();
+    			tour++;
+    		}
+    		if (event.key.code == sf::Keyboard::Q ){
+    			if(i<8){i++;}
+    			j.setX(j.getX()-40);
+    			j.setY(j.getY()+0);
+    			j.newPosition();
+    			tour++;
 
-    			}
+    		}
 
-			}
+		}
 
+
+	}
+		//plus de personnages à jouer
+		if(H.size()==0 && F.size()==0 && PM.size()==0 && F_minus.size()==0 && F_plus.size()==0){
+			flag_end = true;
+			win = false;
+		}
+		//fin du jeu
+		if(tour > tours){
+			flag_end = true;
 
 		}
 
@@ -543,7 +481,7 @@ void Game::show(){
     window.draw(V5);
     window.draw(press_escape);
     this->window.display();}
-    else if (flag_escape == false){
+    else if (flag_escape == false && flag_end == false){
 		numero=std::to_string(i);
 		nomComplet=chemin+numero+ext;
 		texture.loadFromFile(nomComplet);
@@ -642,7 +580,7 @@ void Game::show(){
         this->window.display();
 
 	}
-	else if (flag_escape == true){
+	else if (flag_escape == true && flag_end == false){
 		texture.loadFromFile("Carte/menu.png");
         s.setTexture(texture);
    		s.setScale(0.70f,0.70f);
@@ -664,12 +602,19 @@ void Game::show(){
 		
 	}
 	else if(flag_end == true){
+		if(win == true){
+			
 
+		}
+	
+		else if(win == false){
+			
 
+		}
 
-	}
 	}
 	
+	}	
 	
 }
 void Game::chargementCartes(){

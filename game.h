@@ -20,6 +20,7 @@ class Game{
 	private:
 
 		sf::RenderWindow window;
+		
 		sf::Sprite cartes[8];
 		int tours;
 		Joueur j;
