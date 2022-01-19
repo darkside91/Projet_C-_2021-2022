@@ -7,12 +7,12 @@
 class Viande:public Ressources{
 	public:
 
-		Viande(){};
+		Viande(){this->setNum(1);}
 
 
 	private:
-		sf::Texture texture;
-		sf::Sprite s;
+		
+
 		
 
 

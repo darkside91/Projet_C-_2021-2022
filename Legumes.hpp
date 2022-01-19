@@ -8,11 +8,11 @@ class Legumes:public Ressources{
 	public:
 
 		
-		Legumes(){};
+		Legumes(){this->setNum(0);}
+
 
 	private:
-		sf::Texture texture;
-		sf::Sprite s;
+		
 		
 
 

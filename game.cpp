@@ -1,11 +1,10 @@
 #include "game.h"
 
 
-
 Ressources& Game::rand_ressources(){
 	int x = rand()%5;
 	Viande a;
-	Viande& V = a;
+	Viande& V =a;
 	Legumes b;
 	Legumes& L = b;
 	Eau c;
@@ -21,205 +20,50 @@ Ressources& Game::rand_ressources(){
 			return V;
 			break;
 		case 1:
-		
 			return L;
 			break;
 		case 2:
-			
 			return E;
 			break;
 		case 3:
-			
 			return P;
 			break;
 		case 4:
-			
 			return R;
 			break;
-
 	}
-
-	
 
 }
 
+void Game::cases(std::size_t x1,std::size_t y1,std::size_t x2, std::size_t y2,std::size_t i){
+	for(std::size_t j = 0;j<i;j++){
+		Cases c1(x1,y1,x2,y2);
+		Ressources r = rand_ressources();
+		printf("numR %d\n",r.getNum() );
+
+		c1.remplir_case(r);
+		Ressources r2 = rand_ressources();
+		c1.remplir_case(r2);
+		C.push_back(c1);
+		x1 += 50;
+		x2 += 50;
+	}
+}
+
 void Game::init_cases(){
-	std::size_t x1,x2,y1,y2;
-	x1 = 783; //x de gauche
-	y1 = 516; // y du haut
-	x2 = 835; // x de droite
-	y2 = 552; // y du bas
-
-	for(std::size_t i = 0;i<10;i++){
-		Cases c1(x1,y1,x2,y2);
-
-		c1.remplir_case(rand_ressources());
-		c1.remplir_case(rand_ressources());
-		C.push_back(c1);
-		x1 += 52;
-		x2 += 52;
-	}
-	y1 = y2;
-	y2 = 600;
-	x1 = 278;
-	x2 = 333;
-
-	for(std::size_t i=0;i<19;i++){
-		Cases c1(x1,y1,x2,y2);
-
-		c1.remplir_case(rand_ressources());
-		c1.remplir_case(rand_ressources());
-		C.push_back(c1);
-		x1 += 52;
-		x2 += 52;
-
-	}
-	y1 = 513;
-	x1 = 249;
-	y2 = 556;
-	x2 = 301;
-	for(std::size_t i=0;i<8;i++){
-		Cases c1(x1,y1,x2,y2);
-
-		c1.remplir_case(rand_ressources());
-		c1.remplir_case(rand_ressources());
-		C.push_back(c1);
-		x1 += 52;
-		x2 += 52;
-
-	}
-	y1 = 615;
-	x1 = 425;
-	y2 = 651;
-	x2 = 481;
-	for(std::size_t i=0;i<17;i++){
-		Cases c1(x1,y1,x2,y2);
-
-		c1.remplir_case(rand_ressources());
-		c1.remplir_case(rand_ressources());
-		C.push_back(c1);
-		x1 += 52;
-		x2 += 52;
-	}
-	x1 = 458;
-	y1 = 658;
-	x2 = 511;
-	y2 = 695;
-	for(std::size_t i=0;i<12;i++){
-		Cases c1(x1,y1,x2,y2);
-
-		c1.remplir_case(rand_ressources());
-		c1.remplir_case(rand_ressources());
-		C.push_back(c1);
-		x1 += 52;
-		x2 += 52;
-	}
-	x1 = 603;
-	y1 = 704;
-	x2 = 660;
-	y2 = 745;
-	for(std::size_t i=0;i<9;i++){
-		Cases c1(x1,y1,x2,y2);
-
-		c1.remplir_case(rand_ressources());
-		c1.remplir_case(rand_ressources());
-		C.push_back(c1);
-		x1 += 52;
-		x2 += 52;
-	}
-	x1 = 692;
-	y1 = 750;
-	x2 = 751;
-	y2 = 782;
-	for(std::size_t i=0;i<7;i++){
-		Cases c1(x1,y1,x2,y2);
-
-		c1.remplir_case(rand_ressources());
-		c1.remplir_case(rand_ressources());
-		C.push_back(c1);
-		x1 += 52;
-		x2 += 52;
-	}
-	x1 = 278;
-	y1 = 467;
-	x2 = 337;
-	y2 = 511;
-	for(std::size_t i=0;i<18;i++){
-		Cases c1(x1,y1,x2,y2);
-
-		c1.remplir_case(rand_ressources());
-		c1.remplir_case(rand_ressources());
-		C.push_back(c1);
-		x1 += 52;
-		x2 += 52;
-	}
-	x1 = 249;
-	y1 = 418;
-	x2 = 305;
-	y2 = 463;
-	for(std::size_t i=0;i<19;i++){
-		Cases c1(x1,y1,x2,y2);
-
-		c1.remplir_case(rand_ressources());
-		c1.remplir_case(rand_ressources());
-		C.push_back(c1);
-		x1 += 52;
-		x2 += 52;
-	}
-	x1 = 282;
-	y1 = 372;
-	x2 = 334;
-	y2 = 420;
-	for(std::size_t i=0;i<18;i++){
-		Cases c1(x1,y1,x2,y2);
-
-		c1.remplir_case(rand_ressources());
-		c1.remplir_case(rand_ressources());
-		C.push_back(c1);
-		x1 += 52;
-		x2 += 52;
-	}
-	x1 = 306;
-	y1 = 329;
-	x2 = 358;
-	y2 = 376;
-	for(std::size_t i=0;i<17;i++){
-		Cases c1(x1,y1,x2,y2);
-
-		c1.remplir_case(rand_ressources());
-		c1.remplir_case(rand_ressources());
-		C.push_back(c1);
-		x1 += 52;
-		x2 += 52;
-	}
-	x1 = 395;
-	y1 = 285;
-	x2 = 449;
-	y2 = 333;
-	for(std::size_t i=0;i<15;i++){
-		Cases c1(x1,y1,x2,y2);
-
-		c1.remplir_case(rand_ressources());
-		c1.remplir_case(rand_ressources());
-		C.push_back(c1);
-		x1 += 52;
-		x2 += 52;
-	}
-	x1 = 424;
-	y1 = 240;
-	x2 = 482;
-	y2 = 282;
-	//ligne de 11 en dessous des rochers du haut
-	for(std::size_t i=0;i<11;i++){
-		Cases c1(x1,y1,x2,y2);
-
-		c1.remplir_case(rand_ressources());
-		c1.remplir_case(rand_ressources());
-		C.push_back(c1);
-		x1 += 52;
-		x2 += 52;
-	}
-
+	cases(783,516,835,552,10);
+	cases(278,552,333,600,19);
+	cases(249,513,301,556,8);
+	cases(425,615,481,651,17);
+	cases(458,658,511,695,12);
+	cases(603,704,660,745,9);
+	cases(692,750,751,782,7);
+	cases(278,467,337,511,18);
+	cases(249,418,305,463,19);
+	cases(282,372,334,420,18);
+	cases(306,329,358,376,17);
+	cases(395,285,449,333,15);
+	cases(424,240,482,282,11);
 }
 
 Game::Game(int a){
@@ -229,7 +73,6 @@ Game::Game(int a){
 	init_cases();
 
 	//Villageois et ressources de base
-
 	H.push_back(Hommes());
 	F.push_back(Femmes());
 	V.push_back(Viande());
@@ -238,8 +81,49 @@ Game::Game(int a){
 	L.push_back(Legumes());
 	B.push_back(Bois());
 	P.push_back(Pierre());
-
 	
+}
+
+void Game::recolter(){
+	std::size_t r;
+	//récolter les ressources de la case, une fois récoltés la case ne contient plus de ressources
+	
+	for(std::size_t i=0;i<C.size();i++){
+		if(j.getX()>=C[i].getX1() && j.getX()<=C[i].getX2() && j.getY()>= C[i].getY1() && j.getY()<= C[i].getY2()){
+			//on ne récolte pas si la case a déjà été visitée. 
+			for(std::size_t j=0;j<C[i].Size_R();j++){
+				r=C[i].getTypeR(j);
+				switch(r){
+					case 0:
+						L.push_back(Legumes());
+						printf("legumes : %d\n",L.size() );
+						break;
+					case 1:
+						V.push_back(Viande());
+						printf("viande : %d\n",V.size() );
+						break;
+					case 2:
+						E.push_back(Eau());
+						printf("eau : %d\n",E.size() );
+						break;
+					case 3:
+						P.push_back(Pierre());
+						printf("Pierre : %d\n",P.size() );
+						break;
+					case 4:
+						B.push_back(Bois());
+						printf("bois : %d\n",B.size() );
+						break;
+
+				}
+				printf("OK %d\n",r);
+				C[i].erase_r(j);
+			}
+		
+		}
+	}
+
+
 }
 
 void Game::show(){
@@ -284,8 +168,6 @@ void Game::show(){
 	sf::Sprite V3;
 	sf::Sprite V4;
 	sf::Sprite V5;
-	sf::Sprite press_escape;
-
 
     texture.loadFromFile("Carte/fd/1.png");
     s.setTexture(texture);
@@ -346,10 +228,6 @@ void Game::show(){
    	V5.setScale(1.5f,1.5f);
    	V5.setPosition(1688,636);
 
-   	texture7.loadFromFile("Assets_visuels/press_escape.png");
-   	press_escape.setTexture(texture7);
-   	press_escape.setPosition(500,100);
-
 	bool flag_escape = false;
 	bool flag_debut = true;
 	bool flag_end = false;
@@ -399,6 +277,7 @@ void Game::show(){
     			j.setX(j.getX()-12);
     			j.setY(j.getY()-38);
     			j.newPosition();
+    			recolter();
     			tour++;
 
     		}
@@ -409,6 +288,7 @@ void Game::show(){
     			j.setX(j.getX()+45);
     			j.setY(j.getY()-40);
     			j.newPosition();
+    			recolter();
     			tour++;
     		}
     		if (event.key.code == sf::Keyboard::D ){
@@ -418,6 +298,7 @@ void Game::show(){
     			j.setX(j.getX()+75);
     			j.setY(j.getY()+10);
     			j.newPosition();
+    			recolter();
     			tour++;
     		}
     		if (event.key.code == sf::Keyboard::X ){
@@ -427,6 +308,7 @@ void Game::show(){
     			j.setX(j.getX()+45);
     			j.setY(j.getY()+40);
     			j.newPosition();
+    			recolter();
     			tour++;
 
     		}
@@ -437,6 +319,7 @@ void Game::show(){
     			j.setX(j.getX()-5);
     			j.setY(j.getY()+50);
     			j.newPosition();
+    			recolter();
     			tour++;
     		}
     		if (event.key.code == sf::Keyboard::Q ){
@@ -444,6 +327,7 @@ void Game::show(){
     			j.setX(j.getX()-40);
     			j.setY(j.getY()+0);
     			j.newPosition();
+    			recolter();
     			tour++;
 
     		}
@@ -479,7 +363,7 @@ void Game::show(){
     window.draw(V3);
     window.draw(V4);
     window.draw(V5);
-    window.draw(press_escape);
+    
     this->window.display();}
     else if (flag_escape == false && flag_end == false){
 		numero=std::to_string(i);
@@ -548,13 +432,13 @@ void Game::show(){
    		texture12.loadFromFile(nomComplet2);
    		V3.setTexture(texture12);
 
-   		numero2= std::to_string(B.size());
+   		numero2= std::to_string(P.size());
    		chemin2 = "Assets_visuels/";
    		nomComplet2 = chemin2 + numero2 + ext;
    		texture13.loadFromFile(nomComplet2);
    		V4.setTexture(texture13);
 
-   		numero2= std::to_string(P.size());
+   		numero2= std::to_string(B.size());
    		chemin2 = "Assets_visuels/";
    		nomComplet2 = chemin2 + numero2 + ext;
    		texture14.loadFromFile(nomComplet2);

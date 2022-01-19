@@ -8,11 +8,9 @@ class Bois:public Ressources{
 	public:
 
 		
-		Bois(){};
+		Bois(){this->setNum(4);}
 
 	private:
-		sf::Texture texture;
-		sf::Sprite s;
 		
 
 

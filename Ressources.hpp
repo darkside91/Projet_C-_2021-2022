@@ -7,11 +7,12 @@ class Ressources{
 	public:
 
 		
-
+		const std::size_t getNum(){return num;}
+		void setNum(std::size_t i){num = i;}
 
 	private:
-		sf::Texture texture;
-		sf::Sprite s;
+		
+		std::size_t num;
 		
 
 

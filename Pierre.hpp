@@ -8,11 +8,9 @@ class Pierre:public Ressources{
 	public:
 
 		
-		Pierre(){};
+		Pierre(){this->setNum(3);}
 
 	private:
-		sf::Texture texture;
-		sf::Sprite s;
 		
 
 

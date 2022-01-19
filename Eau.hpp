@@ -7,12 +7,12 @@
 class Eau:public Ressources{
 	public:
 
-		Eau(){};
+		Eau(){this->setNum(2);}
 
 
 	private:
-		sf::Texture texture;
-		sf::Sprite s;
+		
+		
 		
 
 

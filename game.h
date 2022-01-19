@@ -45,6 +45,8 @@ class Game{
 		Game(int a);
 		void show();
 		void chargementCartes();
+		void cases(std::size_t x1,std::size_t y1,std::size_t x2, std::size_t y2,std::size_t i);
 		void init_cases();
+		void recolter();
 		Ressources& rand_ressources();
 };
