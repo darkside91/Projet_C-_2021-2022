@@ -603,12 +603,19 @@ void Game::show(){
 	}
 	else if(flag_end == true){
 		if(win == true){
+			texture.loadFromFile("Assets_visuels/ecran_end_win.png");
+			s.setTexture(texture);
+			s.setScale(3.f,3.f);
+			window.draw(s);
+			this->window.display();
 			
-
 		}
-	
 		else if(win == false){
-			
+			texture.loadFromFile("Assets_visuels/ecran_end_loose.png");
+			s.setTexture(texture);
+			s.setScale(3.f,3.f);
+			window.draw(s);
+			this->window.display();		
 
 		}
 
