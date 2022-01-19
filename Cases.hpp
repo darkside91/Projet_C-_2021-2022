@@ -10,8 +10,8 @@
 
 class Cases{
 	public:
-
-		
+		Cases(std::size_t x1,std::size_t y1,std::size_t x2, std::size_t y2);
+		void remplir_case(Ressources& r){R.push_back(r);}
 
 
 	private:

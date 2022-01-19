@@ -9,6 +9,7 @@ using namespace sf;
 
 int main()
 {
+	//Music
 	sf::Music music;
 	if (!music.openFromFile("Assets_visuels/Cheilinus_Undulatus.wav"))
     return -1; // error

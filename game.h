@@ -18,10 +18,12 @@
 
 class Game{
 	private:
+
 		sf::RenderWindow window;
 		sf::Sprite cartes[8];
-		int life;
+		int tours;
 		Joueur j;
+
 		//vecteur de chaque type de personnage
 		std::vector<Hommes> H;
 		std::vector<Femmes> F;
@@ -42,4 +44,6 @@ class Game{
 		Game(int a);
 		void show();
 		void chargementCartes();
+		void init_cases();
+		Ressources& rand_ressources();
 };
