@@ -1,6 +1,6 @@
 #include "game.h"
 
-
+//fonction qui randomise la ressource de la case à l'initialisation
 Ressources& Game::rand_ressources(){
 	int x = rand()%5;
 	Viande a;
@@ -39,7 +39,7 @@ void Game::cases(std::size_t x1,std::size_t y1,std::size_t x2, std::size_t y2,st
 	for(std::size_t j = 0;j<i;j++){
 		Cases c1(x1,y1,x2,y2);
 		Ressources r = rand_ressources();
-		printf("numR %d\n",r.getNum() );
+		
 
 		c1.remplir_case(r);
 		Ressources r2 = rand_ressources();
@@ -112,11 +112,11 @@ void Game::recolter(){
 						break;
 					case 4:
 						B.push_back(Bois());
-						printf("bois : %d\n",B.size() );
+						printf("Bois : %d\n",B.size() );
 						break;
 
 				}
-				printf("OK %d\n",r);
+				
 				C[i].erase_r(j);
 			}
 		
@@ -508,117 +508,3 @@ void Game::show(){
 	}	
 	
 }
-void Game::chargementCartes(){
-	/*sf::Texture load[8];
-	std::string chemin="Carte/fd/";
-	std::string ext=".png";
-	std::string numero;
-	std::string nomComplet;
-	for(int i=0;i<8;i++){
-		numero=std::to_string(i+1);
-		nomComplet=chemin+numero+ext;
-		load[i].loadFromFile(nomComplet);
-		std::cout<<nomComplet<<std::endl;
-		sf::Sprite s(load[i]);
-		cartes[i]=s;
-		cartes[i].setScale(0.62f,0.55f);
-		window.draw(cartes[1]);
-		this->window.display();
-		this->window.clear();
-	}*/
-	sf::Texture texture;
-	sf::Texture texture2;
-	sf::Texture texture3;
-	sf::Texture texture4; //1.png
-	sf::Texture texture5; //0.png
-	sf::Texture texture6; // 2.Png
-	sf::Texture texture7; 
-
-
-	sf::Sprite s2;
-	sf::Sprite s3;
-	sf::Sprite sH;
-	sf::Sprite sF;
-	sf::Sprite sMplus;
-	sf::Sprite sMminus;
-	sf::Sprite sMpm;
-	sf::Sprite V1;
-	sf::Sprite V2;
-	sf::Sprite V3;
-	sf::Sprite V4;
-	sf::Sprite V5;
-	sf::Sprite press_escape;
-
-    texture.loadFromFile("Carte/fd/1.png");
-    sf::Sprite s(texture);
-    s.setScale(0.62f,0.55f);
-    texture2.loadFromFile("Assets_visuels/villageois.png");
-   	s2.setTexture(texture2);
-   	s2.setScale(0.65f,0.65f);
-    s2.setPosition(1400,0);
-    texture3.loadFromFile("Assets_visuels/ressources.png");
-   	s3.setTexture(texture3);
-   	s3.setScale(0.65f,0.65f);
-   	s3.setPosition(1400,500);
-   	texture4.loadFromFile("Assets_visuels/1.png");
-   	texture5.loadFromFile("Assets_visuels/0.png");
-   	texture6.loadFromFile("Assets_visuels/2.png");
-   	sH.setTexture(texture4);
-   	sH.setPosition(1700,200); //numéro Homme
-   	sH.setScale(1.5f,1.5f);
-   	sF.setTexture(texture4);
-   	sF.setScale(1.5f,1.5f);
-   	sF.setPosition(1516,200);
-   	sMplus.setTexture(texture5);
-   	sMplus.setScale(1.5f,1.5f);
-   	sMplus.setPosition(1466,368);
-   	sMminus.setTexture(texture5);
-   	sMminus.setScale(1.5f,1.5f);
-   	sMminus.setPosition(1783,371);
-   	sMpm.setTexture(texture5);
-   	sMpm.setScale(1.5f,1.5f);
-   	sMpm.setPosition(1630,373);
-
-   	V1.setTexture(texture4);
-   	V1.setScale(1.5f,1.5f);
-   	V1.setPosition(1527,608);
-
-   	V2.setTexture(texture4);
-   	V2.setScale(1.5f,1.5f);
-   	V2.setPosition(1527,698);
-
-   	V3.setTexture(texture6);
-   	V3.setScale(1.5f,1.5f);
-   	V3.setPosition(1525,800);
-
-   	V4.setTexture(texture4);
-   	V4.setScale(1.5f,1.5f);
-   	V4.setPosition(1688,758);
-
-   	V5.setTexture(texture4);
-   	V5.setScale(1.5f,1.5f);
-   	V5.setPosition(1688,636);
-
-
-
-    window.draw(s);
-    window.draw(s2);
-    window.draw(s3);
-    window.draw(j.getSprite());
-    window.draw(sH);
-    window.draw(sF);
-    window.draw(sMpm);
-    window.draw(sMminus);
-    window.draw(sMplus);
-    window.draw(V1);
-    window.draw(V2);
-    window.draw(V3);
-    window.draw(V4);
-    window.draw(V5);
-    window.draw(press_escape);
-    this->window.display();
-    //this->window.clear();
-   
-	
-}
-
