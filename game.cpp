@@ -142,6 +142,7 @@ void Game::show(){
 	sf::Texture texture12; //7
 	sf::Texture texture13; //8
 	sf::Texture texture14; //9
+	sf::Texture texture_feed;
 
 	std::size_t i = 1;
 	std::size_t tour =0; //compteur de tours
@@ -168,6 +169,7 @@ void Game::show(){
 	sf::Sprite V3;
 	sf::Sprite V4;
 	sf::Sprite V5;
+	sf::Sprite feed_button;
 
     texture.loadFromFile("Carte/fd/1.png");
     s.setTexture(texture);
@@ -232,6 +234,9 @@ void Game::show(){
 	bool flag_debut = true;
 	bool flag_end = false;
 	bool win = true; //gagner ou perdu
+	bool flag_feed = false;
+	bool flag_reproduction = false;
+	bool repro = false;
 
 	while (this->window.isOpen())
  	{
@@ -254,13 +259,19 @@ void Game::show(){
            				}
            			
            			}
+           			if(flag_feed == true){
+           				if(event.mouseButton.x <938 && event.mouseButton.x >752 && event.mouseButton.y <412 && event.mouseButton.y >245){
+           					consomme();
+           					flag_feed = false;
+           				}
+           			}
            			//pour les tests
            			std::cout << "mouse x: " << event.mouseButton.x << std::endl;
         			std::cout << "mouse y: " << event.mouseButton.y << std::endl;
            			break;
            }
 
-           if (event.type == sf::Event::KeyPressed){
+           if (event.type == sf::Event::KeyPressed && flag_feed == false && flag_reproduction == false){
 
 			//écran de pause
     		if (event.key.code == sf::Keyboard::Escape ){
@@ -278,6 +289,7 @@ void Game::show(){
     			j.setY(j.getY()-38);
     			j.newPosition();
     			recolter();
+    			flag_feed = true;
     			tour++;
 
     		}
@@ -289,6 +301,7 @@ void Game::show(){
     			j.setY(j.getY()-40);
     			j.newPosition();
     			recolter();
+    			flag_feed = true;
     			tour++;
     		}
     		if (event.key.code == sf::Keyboard::D ){
@@ -299,6 +312,7 @@ void Game::show(){
     			j.setY(j.getY()+10);
     			j.newPosition();
     			recolter();
+    			flag_feed = true;
     			tour++;
     		}
     		if (event.key.code == sf::Keyboard::X ){
@@ -309,6 +323,7 @@ void Game::show(){
     			j.setY(j.getY()+40);
     			j.newPosition();
     			recolter();
+    			flag_feed = true;
     			tour++;
 
     		}
@@ -320,6 +335,7 @@ void Game::show(){
     			j.setY(j.getY()+50);
     			j.newPosition();
     			recolter();
+    			flag_feed = true;
     			tour++;
     		}
     		if (event.key.code == sf::Keyboard::Q ){
@@ -328,6 +344,7 @@ void Game::show(){
     			j.setY(j.getY()+0);
     			j.newPosition();
     			recolter();
+    			flag_feed = true;
     			tour++;
 
     		}
@@ -460,6 +477,14 @@ void Game::show(){
     window.draw(V3);
     window.draw(V4);
     window.draw(V5);
+    if(flag_feed == true){
+   			texture_feed.loadFromFile("Assets_visuels/water.png");
+   			feed_button.setTexture(texture_feed);
+   			feed_button.setScale(0.5f,0.5f);
+   			feed_button.setPosition(744,232);
+   			window.draw(feed_button);
+
+   		}
 
         this->window.display();
 
@@ -507,4 +532,9 @@ void Game::show(){
 	
 	}	
 	
+}
+
+void Game::consomme(){
+	
+
 }

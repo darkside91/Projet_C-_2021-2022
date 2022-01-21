@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp> 
 #include "Personnage.hpp"
 
+
 class Humains:public Personnage{
 	public:
 
@@ -14,6 +15,8 @@ class Humains:public Personnage{
 
 
 	private:
+		
+		
 		
 		
 
