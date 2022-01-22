@@ -76,8 +76,10 @@ Game::Game(int a){
 	H.push_back(Hommes());
 	F.push_back(Femmes());
 	V.push_back(Viande());
+	V.push_back(Viande());
 	E.push_back(Eau());
 	E.push_back(Eau());
+	L.push_back(Legumes());
 	L.push_back(Legumes());
 	B.push_back(Bois());
 	P.push_back(Pierre());
