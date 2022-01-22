@@ -66,8 +66,8 @@ void Game::init_cases(){
 	cases(424,240,482,282,11);
 }
 
-Game::Game(int a){
-	this->tours=a;
+Game::Game(std::size_t t){
+	this->tours=t;
 	this->window.create(sf::VideoMode(1600, 1000), "Last Earth");
 
 	init_cases();

@@ -5,8 +5,6 @@ Personnage& Hommes::reproduction(Personnage& p){
 
 	std::size_t x = rand()%7+1;
 
-	//if(p.getType_perso()== 1 && p.getBool()==true)//humains ne peuvent se reproduire qu'avec humains, femme avec homme et vice versa
-//{
 	if(x == 1 || x == 2 ){
 		Hommes h;
 		Hommes& hom = h;
@@ -32,7 +30,6 @@ Personnage& Hommes::reproduction(Personnage& p){
 		MutantsF_minus& mfm = fm;
 		return mfm;
 	}
-//}
 
 }
 

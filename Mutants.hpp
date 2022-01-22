@@ -10,14 +10,8 @@ class Mutants:public Personnage{
 	public:
 
 		Mutants();
-		
-		
-		
 
 
 	private:
 		
-		
-
-
 };

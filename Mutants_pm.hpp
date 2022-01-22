@@ -13,12 +13,8 @@ class Mutants_pm:public Mutants{
 		Mutants_pm():Mutants(){setType_r(3);setVie(5);}
 		Personnage& reproduction(Personnage& p);
 		bool choisir(std::size_t x,std::size_t y);
-		
-
 
 	private:
 		
-		
-
 
 };

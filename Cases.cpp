@@ -9,5 +9,5 @@ Cases::Cases(std::size_t _x1,std::size_t _y1,std::size_t _x2, std::size_t _y2){
 }
 
 std::size_t Cases::getTypeR(std::size_t i){	
-	return R[i].getNum();
+	return R[i].getType();
 }

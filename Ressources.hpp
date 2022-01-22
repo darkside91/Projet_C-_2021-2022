@@ -14,8 +14,6 @@ class Ressources{
 	private:
 		
 		std::size_t type;
-		
-
-
+	
 
 };
