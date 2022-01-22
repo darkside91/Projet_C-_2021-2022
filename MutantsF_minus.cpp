@@ -22,3 +22,14 @@ Personnage& MutantsF_minus::reproduction(Personnage& p){
 	}
 
 }
+
+bool MutantsF_minus::choisir(std::size_t x,std::size_t y){
+
+
+	if(x <1839 && x >1723 && y <343 && y >239){
+           				return true;	
+           					}
+    else{
+    	return false;
+    }
+}

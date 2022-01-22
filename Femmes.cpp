@@ -1,7 +1,7 @@
 #include "Femmes.hpp"
 Personnage& Femmes::reproduction(Personnage& p){
 
-	std::size_t x = rand()%7;
+	std::size_t x = rand()%7+1;
 
 	if(p.getType_perso()== 1 && p.getBool()==false)//humains ne peuvent se reproduire qu'avec humains, femme avec homme et vice versa
 {
@@ -32,4 +32,16 @@ Personnage& Femmes::reproduction(Personnage& p){
 	}
 }
 
+}
+
+
+bool Femmes::choisir(std::size_t x,std::size_t y){
+
+
+	if(x <1537 && x >1439 && y <185 && y >80){
+           				return true;	
+           					}
+    else{
+    	return false;
+    }
 }

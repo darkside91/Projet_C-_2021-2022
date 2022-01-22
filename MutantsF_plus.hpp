@@ -11,8 +11,9 @@
 
 class MutantsF_plus:public Mutants{
 	public:
-		MutantsF_plus():Mutants(){};
+		MutantsF_plus():Mutants(){setType_r(4);setVie(4);}
 		Personnage& reproduction(Personnage& p);
+		bool choisir(std::size_t x,std::size_t y);
 		
 		
 

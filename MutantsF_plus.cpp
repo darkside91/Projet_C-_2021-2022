@@ -1,7 +1,7 @@
 #include "MutantsF_plus.hpp"
 
 Personnage& MutantsF_plus::reproduction(Personnage& p){
-	std::size_t x = rand()%3;
+	std::size_t x = rand()%3+1;
 
 	if(x == 1){
 		Mutants_pm p;
@@ -21,4 +21,15 @@ Personnage& MutantsF_plus::reproduction(Personnage& p){
 
 	}
 
+}
+
+bool MutantsF_plus::choisir(std::size_t x,std::size_t y){
+
+
+	if(x <1541 && x >1429 && y <340 && y >231){
+           				return true;	
+           					}
+    else{
+    	return false;
+    }
 }

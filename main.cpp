@@ -9,6 +9,7 @@ using namespace sf;
 
 int main()
 {
+	srand((unsigned) time(0));
 	//Music
 	sf::Music music;
 	if (!music.openFromFile("Assets_visuels/Cheilinus_Undulatus.wav"))
@@ -18,7 +19,7 @@ int main()
 	music.play();
 
 	//"Carte/fd/1.png"
-	Game g(10);
+	Game g(8);
 	g.show();
 	//sf::RenderWindow window;
 	//window.create(sf::VideoMode(1600, 1000), "Survivor Lander");

@@ -143,6 +143,8 @@ void Game::show(){
 	sf::Texture texture13; //8
 	sf::Texture texture14; //9
 	sf::Texture texture_feed;
+	sf::Texture yes;
+	sf::Texture no;
 
 	std::size_t i = 1;
 	std::size_t tour =0; //compteur de tours
@@ -170,6 +172,8 @@ void Game::show(){
 	sf::Sprite V4;
 	sf::Sprite V5;
 	sf::Sprite feed_button;
+	sf::Sprite yes_button;
+	sf::Sprite no_button;
 
     texture.loadFromFile("Carte/fd/1.png");
     s.setTexture(texture);
@@ -237,6 +241,10 @@ void Game::show(){
 	bool flag_feed = false;
 	bool flag_reproduction = false;
 	bool repro = false;
+	
+
+	std::size_t p1 = 0;
+	std::size_t p2 = 0;
 
 	while (this->window.isOpen())
  	{
@@ -263,7 +271,140 @@ void Game::show(){
            				if(event.mouseButton.x <938 && event.mouseButton.x >752 && event.mouseButton.y <412 && event.mouseButton.y >245){
            					consomme();
            					flag_feed = false;
+           					flag_reproduction = true;
            				}
+           			}
+           			if(flag_reproduction == true && repro == false){
+           				if(event.mouseButton.x <736 && event.mouseButton.x >647 && event.mouseButton.y <622 && event.mouseButton.y >530){
+           					//bouton yes
+           					//la reproduction prend une ration de bois ou de pierre (pour agrandir le village)
+
+           					if(P.size()>0 || B.size()>0){
+
+           						//on utilise une ressource et on appuie sur deux personnages différents
+           						//on vérifie si on au moins 2 personnages (et si il ne reste que des humains deux humains de sexe différent)
+           						if(repro_ok()){
+           							//ok théoriquement on peut faire la repro
+           							repro = true;
+
+           						}
+           						else{
+           							std::cout << "Reproduction fail : pas assez de villageois"<<std::endl;
+           							flag_reproduction = false;
+           							sleep(2);
+           					//on compte les morts après la repro
+           							mourir();
+           						}
+           					}
+           					else{
+           						std::cout << "Reproduction fail : pas assez de bois ou de pierre"<<std::endl;
+           						flag_reproduction = false;
+           						sleep(2);
+           					//on compte les morts après la repro
+           						mourir();
+           					}
+           					//flag_reproduction = false;
+           					//sleep(2);
+           					//on compte les morts après la repro
+           					//mourir();
+           				}
+           				if(event.mouseButton.x <1092 && event.mouseButton.x >997 && event.mouseButton.y <627 && event.mouseButton.y >524){
+           					//bouton no
+           					flag_reproduction = false;
+           					sleep(2);
+           					mourir();
+           				}
+
+           				
+           			}
+           			if(repro == true){
+
+           				if(p1 == 0){
+
+           				if(H.size()>0){
+           					if(H[0].choisir(event.mouseButton.x,event.mouseButton.y)){
+           						p1 = 1;
+           					}
+           				}
+
+           				if(F.size()>0){
+           					if(F[0].choisir(event.mouseButton.x,event.mouseButton.y)){
+           						p1 = 2;
+           					}
+           				}
+
+           				if(PM.size()>0){
+           					if(PM[0].choisir(event.mouseButton.x,event.mouseButton.y)){
+           						p1 = 3;
+           					}
+           				}
+
+           				if(F_plus.size()>0){
+           					if(F_plus[0].choisir(event.mouseButton.x,event.mouseButton.y)){
+           						p1 = 4;
+           					}
+           				}
+
+           				if(F_minus.size()>0){
+           					if(F_minus[0].choisir(event.mouseButton.x,event.mouseButton.y)){
+           						p1 = 5;
+           					}
+           				}
+           			}
+           			else{
+           				if(H.size()>0){
+           					if(H[0].choisir(event.mouseButton.x,event.mouseButton.y)){
+           						p2 = 1;
+           					}
+           				}
+
+           				if(F.size()>0){
+           					if(F[0].choisir(event.mouseButton.x,event.mouseButton.y)){
+           						p2 = 2;
+           					}
+           				}
+
+           				if(PM.size()>0){
+           					if(PM[0].choisir(event.mouseButton.x,event.mouseButton.y)){
+           						p2 = 3;
+           					}
+           				}
+
+           				if(F_plus.size()>0){
+           					if(F_plus[0].choisir(event.mouseButton.x,event.mouseButton.y)){
+           						p2 = 4;
+           					}
+           				}
+
+           				if(F_minus.size()>0){
+           					if(F_minus[0].choisir(event.mouseButton.x,event.mouseButton.y)){
+           						p2 = 5;
+           					}
+           				}
+           			}
+           			if(p1>0 && p2>0){
+           				std::size_t type = return_perso(p1).reproduction(return_perso(p2)).getType_r();
+           				//ajout du nouvel individu
+           				push_list(type);
+           				//consommation ressource
+           				/*if(B.size()>0){
+           					B.pop_back();
+           				}
+           				else if(P.size()>0){
+           					P.pop_back();
+           				}*/
+           				//remise à la normale des flags
+           				sleep(2);
+           				mourir();
+           				flag_reproduction = false;
+           				repro = false;
+           				p1 = 0;
+           				p2 = 0;
+
+           				//a completer
+
+           			}
+
            			}
            			//pour les tests
            			std::cout << "mouse x: " << event.mouseButton.x << std::endl;
@@ -271,7 +412,7 @@ void Game::show(){
            			break;
            }
 
-           if (event.type == sf::Event::KeyPressed && flag_feed == false && flag_reproduction == false){
+           if (event.type == sf::Event::KeyPressed && flag_feed == false && flag_reproduction == false && repro == false){
 
 			//écran de pause
     		if (event.key.code == sf::Keyboard::Escape ){
@@ -485,6 +626,23 @@ void Game::show(){
    			window.draw(feed_button);
 
    		}
+   	if(flag_reproduction == true){
+   		texture_feed.loadFromFile("Assets_visuels/heart.png");
+   		feed_button.setTexture(texture_feed);
+   		feed_button.setScale(0.5f,0.5f);
+   		feed_button.setPosition(744,232);
+   		yes.loadFromFile("Assets_visuels/blue2.png");
+   		yes_button.setTexture(yes);
+   		yes_button.setScale(0.3f,0.3f);
+   		yes_button.setPosition(632,518);
+   		no.loadFromFile("Assets_visuels/red.png");
+   		no_button.setTexture(no);
+   		no_button.setScale(0.3f,0.3f);
+   		no_button.setPosition(985,518);
+   		window.draw(feed_button);
+   		window.draw(yes_button);
+   		window.draw(no_button);
+   	}
 
         this->window.display();
 
@@ -522,7 +680,7 @@ void Game::show(){
 		else if(win == false){
 			texture.loadFromFile("Assets_visuels/ecran_end_loose.png");
 			s.setTexture(texture);
-			s.setScale(3.f,3.f);
+			s.setScale(2.f,2.f);
 			window.draw(s);
 			this->window.display();		
 
@@ -535,6 +693,198 @@ void Game::show(){
 }
 
 void Game::consomme(){
-	
+	std::size_t x = rand()%3+1;
+	//les humains ne consomment que les ressources alimentaires
+	for(std::size_t i=0;i<H.size();i++){
+		H[i].Perdre_vie();
+		if(E.size()==0 && V.size()==0 && L.size()==0){
+			H[i].setVivant(false); //mort de faim 
+		}
+		//les humains mangent la viande puis les légumes puis l'eau
+		if(V.size()!= 0){
+			V.pop_back();
+		}
+		else if(L.size()!=0){
+			L.pop_back();
+		}
+		else if(E.size()!=0){
+			E.pop_back();
+		}
+
+
+	}
+	for(std::size_t i=0;i<F.size();i++){
+		F[i].Perdre_vie();
+		if(E.size()==0 && V.size()==0 && L.size()==0){
+			F[i].setVivant(false); //mort de faim 
+		}
+		if(V.size()!= 0){
+			V.pop_back();
+		}
+		else if(L.size()!=0){
+			L.pop_back();
+		}
+		else if(E.size()!=0){
+			E.pop_back();
+		}
+		
+
+	}
+	for(std::size_t i=0;i<PM.size();i++){
+		PM[i].Perdre_vie();
+		//les mutants pm peuvent consommer n'importe quelle ressource (bois et pierre incluses)
+		//ils consomment de préférence les mêmes ressources que les humains mais peuvent survivre uniquement de ressources alimentaires
+		if(E.size()==0 && V.size()==0 && L.size()==0 && B.size()==0 && P.size()==0){
+			PM[i].setVivant(false); //mort de faim 
+		}
+		if(V.size()!= 0){
+			V.pop_back();
+		}
+		else if(L.size()!=0){
+			L.pop_back();
+		}
+		else if(E.size()!=0){
+			E.pop_back();
+		}
+		else if(B.size()!=0){
+			B.pop_back();
+		}
+		else if(P.size()!=0){
+			P.pop_back();
+		}
+
+	}
+	for(std::size_t i=0;i<F_minus.size();i++){
+		F_minus[i].Perdre_vie();
+		//les mutants F_minus doivent consommer deux ressources (peu importe la ressource à chaque tour)
+		if(E.size()==0 && V.size()==0 && L.size()==0 && B.size()==0 && P.size()==0){
+			F_minus[i].setVivant(false); //mort de faim 
+		}
+		if(V.size()!= 0){
+			V.pop_back();
+			V.pop_back();
+		}
+		else if(L.size()!=0){
+			L.pop_back();
+			L.pop_back();
+		}
+		else if(E.size()!=0){
+			E.pop_back();
+			E.pop_back();
+		}
+		else if(B.size()!=0){
+			B.pop_back();
+			B.pop_back();
+		}
+		else if(P.size()!=0){
+			P.pop_back();
+			P.pop_back();
+		}
+		
+
+	}
+	for(std::size_t i=0;i<F_plus.size();i++){
+		F_plus[i].Perdre_vie();
+		//les mutants_plus ne peuvent pas mourir sans ressources, ils ne font que perdre de la vie
+	}
+
+
+}
+
+void Game::mourir(){
+	//vérifier qui est mort en fin de tour
+	for(std::size_t i=0;i<H.size();i++){
+		if(H[i].getVivant()==false){
+			H.pop_back();
+			std::cout<<"Un homme est mort"<<std::endl;
+		}
+	}
+	for(std::size_t i=0;i<F.size();i++){
+		if(F[i].getVivant()==false){
+			F.pop_back();
+			std::cout<<"Une femme est morte"<<std::endl;
+		}
+	}
+	for(std::size_t i=0;i<PM.size();i++){
+		if(PM[i].getVivant()==false){
+			PM.pop_back();
+			std::cout<<"Un mutant_pm est mort"<<std::endl;
+		}
+	}
+	for(std::size_t i=0;i<F_minus.size();i++){
+		if(F_minus[i].getVivant()==false){
+			F_minus.pop_back();
+			std::cout<<"Un mutant_minus est mort"<<std::endl;
+		}
+	}
+	for(std::size_t i=0;i<F_plus.size();i++){
+		if(F_plus[i].getVivant()==false){
+			F_plus.pop_back();
+			std::cout<<"Un mutant_plus est mort"<<std::endl;
+		}
+	}
+
+}
+
+bool Game::repro_ok(){
+	if((H.size()+PM.size()+F_minus.size()+F_plus.size())>1){
+		return true;
+	}
+	else if((F.size()+PM.size()+F_minus.size()+F_plus.size())>1){
+		//les mutants peuvent se reproduire avec tout le monde peu importe le sexe
+		return true;
+	}
+	else if(F.size()>0 && H.size()>0 ){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
+
+Personnage& Game::return_perso(std::size_t t){
+	if(t ==1){
+		Hommes hom;
+		Hommes& h=hom;
+		return h;
+	}
+	else if(t ==2){
+		Femmes fem;
+		Femmes& f=fem;
+		return f;
+	}
+	else if(t ==3){
+		Mutants_pm mpm;
+		Mutants_pm& pm=mpm;
+		return pm;
+	}
+	else if(t ==4){
+		MutantsF_plus pfp;
+		MutantsF_plus& fp=pfp;
+		return fp;
+	}
+	else if(t ==5){
+		MutantsF_minus mfm;
+		MutantsF_minus& fm=mfm;
+		return fm;
+	}
+}
+
+void Game::push_list(std::size_t t){
+	if(t ==1){
+		H.push_back(Hommes());
+	}
+	else if(t ==2){
+		F.push_back(Femmes());
+	}
+	else if(t ==3){
+		PM.push_back(Mutants_pm());
+	}
+	else if(t ==4){
+		F_plus.push_back(MutantsF_plus());
+	}
+	else if(t ==5){
+		F_minus.push_back(MutantsF_minus());
+	}
 
 }

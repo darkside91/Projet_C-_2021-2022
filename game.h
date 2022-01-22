@@ -1,5 +1,6 @@
 #include <cstdlib>
 #include <iostream>
+#include <unistd.h>
 #include <SFML/Graphics.hpp> 
 #include <SFML/Audio.hpp>
 #include <vector>
@@ -15,6 +16,7 @@
 #include "Eau.hpp"
 #include "Viande.hpp"
 #include "Legumes.hpp"
+#include <ctime>
 
 class Game{
 	private:
@@ -48,5 +50,9 @@ class Game{
 		void init_cases();
 		void recolter();
 		void consomme();
+		void mourir();
+		bool repro_ok();
+		void push_list(std::size_t t);
+		Personnage& return_perso(std::size_t t);
 		Ressources& rand_ressources();
 };

@@ -10,8 +10,9 @@
 
 class Femmes:public Humains{
 	public:
-		Femmes():Humains(){setFemme(true);}
+		Femmes():Humains(){setFemme(true);setType_r(2);}
 		Personnage& reproduction(Personnage& p);
+		bool choisir(std::size_t x,std::size_t y);
 		
 		
 
