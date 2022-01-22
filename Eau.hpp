@@ -7,7 +7,7 @@
 class Eau:public Ressources{
 	public:
 
-		Eau(){this->setNum(2);}
+		Eau(){this->setType(2);}
 
 
 	private:

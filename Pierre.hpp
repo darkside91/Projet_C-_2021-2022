@@ -8,7 +8,7 @@ class Pierre:public Ressources{
 	public:
 
 		
-		Pierre(){this->setNum(3);}
+		Pierre(){this->setType(3);}
 
 	private:
 		

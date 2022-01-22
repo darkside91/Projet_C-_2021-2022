@@ -89,7 +89,7 @@ Game::Game(int a){
 void Game::recolter(){
 	std::size_t r;
 	//récolter les ressources de la case, une fois récoltés la case ne contient plus de ressources
-	
+	//refaire pour obtenir 2 ressources
 	for(std::size_t i=0;i<C.size();i++){
 		if(j.getX()>=C[i].getX1() && j.getX()<=C[i].getX2() && j.getY()>= C[i].getY1() && j.getY()<= C[i].getY2()){
 			//on ne récolte pas si la case a déjà été visitée. 
@@ -147,6 +147,7 @@ void Game::show(){
 	sf::Texture texture_feed;
 	sf::Texture yes;
 	sf::Texture no;
+	sf::Texture regles;
 
 	std::size_t i = 1;
 	std::size_t tour =0; //compteur de tours
@@ -663,9 +664,16 @@ void Game::show(){
    		s2.setTexture(texture3);
    		s2.setScale(0.7f,0.7f);
    		s2.setPosition(880,630);
+
+   		regles.loadFromFile("Assets_visuels/Regles_du_jeu.png");
+   		Regles_du_jeu.setTexture(regles);
+   		Regles_du_jeu.setPosition(1000,200);
+
     	window.draw(s);
     	window.draw(button);
     	window.draw(s2);
+    	window.draw(Regles_du_jeu);
+
 
     	this->window.display();
 		
@@ -703,13 +711,13 @@ void Game::consomme(){
 			H[i].setVivant(false); //mort de faim 
 		}
 		//les humains mangent la viande puis les légumes puis l'eau
-		if(V.size()!= 0){
+		if(V.size()> 0){
 			V.pop_back();
 		}
-		else if(L.size()!=0){
+		else if(L.size()>0){
 			L.pop_back();
 		}
-		else if(E.size()!=0){
+		else if(E.size()>0){
 			E.pop_back();
 		}
 
@@ -720,13 +728,13 @@ void Game::consomme(){
 		if(E.size()==0 && V.size()==0 && L.size()==0){
 			F[i].setVivant(false); //mort de faim 
 		}
-		if(V.size()!= 0){
+		if(V.size()> 0){
 			V.pop_back();
 		}
-		else if(L.size()!=0){
+		else if(L.size()>0){
 			L.pop_back();
 		}
-		else if(E.size()!=0){
+		else if(E.size()>0){
 			E.pop_back();
 		}
 		
@@ -739,19 +747,19 @@ void Game::consomme(){
 		if(E.size()==0 && V.size()==0 && L.size()==0 && B.size()==0 && P.size()==0){
 			PM[i].setVivant(false); //mort de faim 
 		}
-		if(V.size()!= 0){
+		if(V.size()> 0){
 			V.pop_back();
 		}
-		else if(L.size()!=0){
+		else if(L.size()>0){
 			L.pop_back();
 		}
-		else if(E.size()!=0){
+		else if(E.size()>0){
 			E.pop_back();
 		}
-		else if(B.size()!=0){
+		else if(B.size()>0){
 			B.pop_back();
 		}
-		else if(P.size()!=0){
+		else if(P.size()>0){
 			P.pop_back();
 		}
 
@@ -762,23 +770,23 @@ void Game::consomme(){
 		if(E.size()==0 && V.size()==0 && L.size()==0 && B.size()==0 && P.size()==0){
 			F_minus[i].setVivant(false); //mort de faim 
 		}
-		if(V.size()!= 0){
+		if(V.size()> 0){
 			V.pop_back();
 			V.pop_back();
 		}
-		else if(L.size()!=0){
+		else if(L.size()>0){
 			L.pop_back();
 			L.pop_back();
 		}
-		else if(E.size()!=0){
+		else if(E.size()>0){
 			E.pop_back();
 			E.pop_back();
 		}
-		else if(B.size()!=0){
+		else if(B.size()>0){
 			B.pop_back();
 			B.pop_back();
 		}
-		else if(P.size()!=0){
+		else if(P.size()>0){
 			P.pop_back();
 			P.pop_back();
 		}

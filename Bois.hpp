@@ -8,7 +8,7 @@ class Bois:public Ressources{
 	public:
 
 		
-		Bois(){this->setNum(4);}
+		Bois(){this->setType(4);}
 
 	private:
 		

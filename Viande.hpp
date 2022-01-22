@@ -7,7 +7,7 @@
 class Viande:public Ressources{
 	public:
 
-		Viande(){this->setNum(1);}
+		Viande(){this->setType(1);}
 
 
 	private:

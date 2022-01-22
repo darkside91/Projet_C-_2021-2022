@@ -8,7 +8,7 @@ class Legumes:public Ressources{
 	public:
 
 		
-		Legumes(){this->setNum(0);}
+		Legumes(){this->setType(0);}
 
 
 	private:
