@@ -85,6 +85,9 @@ Le jeu est gagné si à la fin du nombre de tours, il reste au moins un personna
 Le jeu peut être mis sur pause et les règles du jeu peuvent être lues sur l’écran de pause accessible par la touche échap. Le jeu 
 est réintégré en appuyant sur le bouton en forme de planète Terre.
 
+Certaines informations peuvent être lues de manière plus explicite sur le terminal, par exemple la mort d'un personnage, ou 
+l'augmentation d'une ressource. 
+
 ######################################################################################################################################################################################
 III - Tests
 
