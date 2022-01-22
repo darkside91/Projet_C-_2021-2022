@@ -58,9 +58,11 @@ Un tour est constitué de plusieurs étapes :
     3 - Le joueur nourrit ses villageois (chaque type ayant ses spécificités, que nous discuterons plus bas). Pour réaliser cette
         action il faut appuyer sur le bouton bleu à l'icône d'une goutte d'eau.
         
-    4 - Le joueur choisit de reproduire ses villageois ou non (petit bouton bleu ou bouton rouge). Après deux secondes, on voit 
-        qu’un nouvel individu s’est ajouté si la reproduction a fonctionné, si un paramètre n’est pas bon, un message apparaîtra
-        dans le terminal et le jeu continuera. 
+    4 - Le joueur choisit de reproduire ses villageois ou non (petit bouton bleu ou bouton rouge). Il faut appuyer sur un personnage
+        puis l'autre à tour de rôle. Les personnages sont dans la zone Villageois. On ne peut reproduire que des personnages dont le 
+        nombre est égal ou supérieur à 1. Par exemple appuyer sur l'image de la femme puis de l'homme. 
+        Après deux secondes, on voit qu’un nouvel individu s’est ajouté si la reproduction a fonctionné, si un paramètre n’est pas bon,
+        un message apparaîtra dans le terminal et le jeu continuera. 
         
     5 - Les villageois qui n’ont pas été nourris ou qui ont atteint la fin de leur vie meurent et le prochain tour commence.
     
