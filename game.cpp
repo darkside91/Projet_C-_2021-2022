@@ -676,6 +676,7 @@ void Game::consomme(){
 	consomme_F();
 	consomme_pm();
 	consomme_Fminus();
+	consomme_Fminus();
 
 	for(std::size_t i=0;i<F_plus.size();i++){
 		F_plus[i].Perdre_vie();
@@ -763,23 +764,23 @@ void Game::consomme_Fminus(){
 		}
 		if(V.size()> 0){
 			V.pop_back();
-			V.pop_back();
+
 		}
 		else if(L.size()>0){
 			L.pop_back();
-			L.pop_back();
+			
 		}
 		else if(E.size()>0){
 			E.pop_back();
-			E.pop_back();
+		
 		}
 		else if(B.size()>0){
 			B.pop_back();
-			B.pop_back();
+		
 		}
 		else if(P.size()>0){
 			P.pop_back();
-			P.pop_back();
+			
 		}
 	
 	}
