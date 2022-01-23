@@ -150,6 +150,44 @@ bool Game::recolte_direction(int a,int b){
     	recolter();
     	return true;
 }
+//fonction qui récupère les coordonnées du click du joueur et en déduit le type du personnage
+std::size_t Game::choix_reproduction(std::size_t x,std::size_t y){
+	std::size_t p1 =0;
+
+           	if(H.size()>0){
+           		if(H[0].choisir(x,y)){
+           			p1 = 1;
+           		}
+           	}
+
+           	if(F.size()>0){
+           		if(F[0].choisir(x,y)){
+           			p1 = 2;
+           		}
+           	}
+
+           	if(PM.size()>0){
+           		if(PM[0].choisir(x,y)){
+           			p1 = 3;
+           		}
+           	}
+
+           	if(F_plus.size()>0){
+           		if(F_plus[0].choisir(x,y)){
+           			p1 = 4;
+           		}
+           	}
+
+           	if(F_minus.size()>0){
+           		if(F_minus[0].choisir(x,y)){
+           			p1 = 5;
+           		}
+           	}
+
+           	return p1;
+}
+
+
 
 void Game::show(){
 
@@ -339,66 +377,10 @@ void Game::show(){
            				// On choisit nos deux personnages
            				if(p1 == 0){
 
-           				if(H.size()>0){
-           					if(H[0].choisir(event.mouseButton.x,event.mouseButton.y)){
-           						p1 = 1;
-           					}
-           				}
-
-           				if(F.size()>0){
-           					if(F[0].choisir(event.mouseButton.x,event.mouseButton.y)){
-           						p1 = 2;
-           					}
-           				}
-
-           				if(PM.size()>0){
-           					if(PM[0].choisir(event.mouseButton.x,event.mouseButton.y)){
-           						p1 = 3;
-           					}
-           				}
-
-           				if(F_plus.size()>0){
-           					if(F_plus[0].choisir(event.mouseButton.x,event.mouseButton.y)){
-           						p1 = 4;
-           					}
-           				}
-
-           				if(F_minus.size()>0){
-           					if(F_minus[0].choisir(event.mouseButton.x,event.mouseButton.y)){
-           						p1 = 5;
-           					}
-           				}
+           				p1 = choix_reproduction(event.mouseButton.x,event.mouseButton.y);
            			}
            			else{
-           				if(H.size()>0){
-           					if(H[0].choisir(event.mouseButton.x,event.mouseButton.y)){
-           						p2 = 1;
-           					}
-           				}
-
-           				if(F.size()>0){
-           					if(F[0].choisir(event.mouseButton.x,event.mouseButton.y)){
-           						p2 = 2;
-           					}
-           				}
-
-           				if(PM.size()>0){
-           					if(PM[0].choisir(event.mouseButton.x,event.mouseButton.y)){
-           						p2 = 3;
-           					}
-           				}
-
-           				if(F_plus.size()>0){
-           					if(F_plus[0].choisir(event.mouseButton.x,event.mouseButton.y)){
-           						p2 = 4;
-           					}
-           				}
-
-           				if(F_minus.size()>0){
-           					if(F_minus[0].choisir(event.mouseButton.x,event.mouseButton.y)){
-           						p2 = 5;
-           					}
-           				}
+           				p2 = choix_reproduction(event.mouseButton.x,event.mouseButton.y);
            			}
            			if(p1>0 && p2>0){
            				std::size_t type = return_perso(p1).reproduction(return_perso(p2)).getType_r();
@@ -411,8 +393,8 @@ void Game::show(){
            				else if(P.size()>0){
            					P.pop_back();
            				}*/
-           				//remise à la normale des flags
-           				
+
+           				//remise à la normale des flags	
            				flag_reproduction = repro_fin();
            				repro = false;
            				p1 = 0;

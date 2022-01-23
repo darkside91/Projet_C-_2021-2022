@@ -61,6 +61,7 @@ class Game{
 		void mourir();
 		bool repro_ok();
 		void push_list(std::size_t t);
+		std::size_t choix_reproduction(std::size_t x,std::size_t y);
 		const std::size_t getTours(){return tours;}
 		Personnage& return_perso(std::size_t t);
 		Ressources& rand_ressources();
@@ -68,6 +69,7 @@ class Game{
 		const std::size_t getSizeL(){return L.size();}
 		const std::size_t getSizeV(){return V.size();}
 		const std::vector<Hommes> getHvector(){return H;}
+
 };
 template<class T>
 std::ostream& operator<< (std::ostream& out, std::vector<T> p){
