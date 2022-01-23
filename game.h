@@ -67,7 +67,7 @@ class Game{
 		const std::size_t getSizeE(){return E.size();}
 		const std::size_t getSizeL(){return L.size();}
 		const std::size_t getSizeV(){return V.size();}
-		
+		const std::vector<Hommes> getHvector(){return H;}
 };
 template<class T>
 std::ostream& operator<< (std::ostream& out, std::vector<T> p){

@@ -91,3 +91,13 @@ TEST_CASE("6: Cases","[fonctions]"){
 
 }
 
+//test de la surcharge d'opérateur des vecteurs de Personnage
+TEST_CASE("7: Game","[template_surcharge_operateurs]"){
+  Game g(5);
+  std::vector<Hommes> x = g.getHvector();
+  //Test de la surcharge
+  std::stringstream ss;
+  ss << x;
+  REQUIRE(ss.str()=="Homme Vie : 5" );
+
+}
