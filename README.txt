@@ -93,6 +93,23 @@ l'augmentation d'une ressource.
 ######################################################################################################################################################################################
 III - Tests
 
+Le but de ces tests unitaires est de couvrir un maximum des fonctions du code. Le testcase est composé de 9 tests différents soit 19 asserts. 
+Les tests permettent de vérifier le bon déroulement des fonctions de la classe Personnage, de la classe Cases et bien sûr de la classe Game.
+Ces tests ont été volontairement réalisés sur les fonctions au fonctionnement le plus critique pour le jeu. 
+     
+     * Test 1 : vérifie la bonne initialisation du jeu lors de sa création
+     * Test 2 : vérifie si la fonction rand_ressources() de la classe Game retourne bien un objet de type Ressources à l'aide d'un objet type_info
+     * Test 3 : vérifie que la fonction return_perso(std::size t) de la classe Game retourne bien le Personnage du type choisi, à l'aide cette fois 
+                aussi d'un objet type_info
+     * Test 4 : vérifie le bon déroulement de la fonction reproduction(Personnage& p) des classes filles de la classe Personnage. Vérifie que la
+                fonction retourne bien un objet Personnage à l'aide d'un objet typer_info
+     * Test 5 : vérifie la bonne initialisation des classes filles de la classe Personnage mais aussi la perte de vie
+     * Test 6 : vérifie le bon déroulement des fonctions de remplissage et d'effacement de la classe Case ainsi que la surcharge d'opérateur <<
+     * Test 7 : vérifie que la surcharge d'opérateur des vecteurs de Personnage renvoie la bonne std::string
+     * Test 8 : vérifie que la fonction push_list(std::size_ i) de la classe Game ajoute bien un Personnage au bon vecteur
+     * Test 9 : vérifie que la fonction choix_reproduction(std::size_t x, std::size_t y) renvoie la bonne valeur lorsqu'on entre de différentes coordonnées
+                
+
 ######################################################################################################################################################################################
 IV - Crédits
   
