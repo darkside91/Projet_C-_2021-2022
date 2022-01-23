@@ -98,6 +98,25 @@ TEST_CASE("7: Game","[template_surcharge_operateurs]"){
   //Test de la surcharge
   std::stringstream ss;
   ss << x;
-  REQUIRE(ss.str()=="Homme Vie : 5" );
+  REQUIRE(ss.str()=="Homme Vie : 5\n" );
 
 }
+
+//vérifie qu'on ajoute bien un nouveau personnage avec la fonction push_list
+TEST_CASE("8: Game","[push_list]"){
+  Game g(5);
+  g.push_list(1);
+  REQUIRE(g.getHvector().size()==2);
+
+}
+
+//Test fonction choix reproduction
+TEST_CASE("9: Game","[choix_reproduction]"){
+  Game g(5);
+  std::size_t p = g.choix_reproduction(1700,100);
+  REQUIRE(p == 1 );
+  p = g.choix_reproduction(100,100);
+  REQUIRE(p==0);
+
+}
+

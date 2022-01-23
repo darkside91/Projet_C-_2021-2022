@@ -208,8 +208,7 @@ void Game::show(){
 	sf::Texture texture_feed; //bouton bleu 
 	sf::Texture yes; //bouton oui
 	sf::Texture no; //bouton non
-	sf::Texture regles;
-
+	sf::Texture regles; //regles du jeu
 
 	std::size_t i = 1;
 	std::size_t tour =0; //compteur de tours
@@ -386,7 +385,7 @@ void Game::show(){
            				std::size_t type = return_perso(p1).reproduction(return_perso(p2)).getType_r();
            				//ajout du nouvel individu
            				push_list(type);
-           				//consommation ressource
+           				//consommation ressource reproduction pour augmenter la difficulté
            				/*if(B.size()>0){
            					B.pop_back();
            				}
@@ -869,7 +868,7 @@ Personnage& Game::return_perso(std::size_t t){
 	}
 }
 
-//sortir le personnage de la liste lorsqu'il meurt 
+//ajout du nouvel individu
 void Game::push_list(std::size_t t){
 	if(t ==1){
 		H.push_back(Hommes());
