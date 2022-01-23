@@ -2,7 +2,7 @@
 
 //fonction qui randomise la ressource de la case à l'initialisation
 Ressources& Game::rand_ressources(){
-	int x = rand()%5;
+	std::size_t x = rand()%5;
 	Viande a;
 	Viande& V =a;
 	Legumes b;
@@ -12,7 +12,6 @@ Ressources& Game::rand_ressources(){
 	Pierre d;
 	Pierre& P = d;
 	Bois e;
-	
 	Bois& R = e;
 
 	switch(x)
@@ -36,12 +35,11 @@ Ressources& Game::rand_ressources(){
 
 }
 
+//fonction d'initialisation des cases
 void Game::cases(std::size_t x1,std::size_t y1,std::size_t x2, std::size_t y2,std::size_t i){
 	for(std::size_t j = 0;j<i;j++){
 		Cases c1(x1,y1,x2,y2);
 		Ressources r = rand_ressources();
-		
-
 		c1.remplir_case(r);
 		Ressources r2 = rand_ressources();
 		c1.remplir_case(r2);
@@ -51,6 +49,7 @@ void Game::cases(std::size_t x1,std::size_t y1,std::size_t x2, std::size_t y2,st
 	}
 }
 
+//Seconde fonction d'initialisation des cases pour créer une map 
 void Game::init_cases(){
 	cases(783,516,835,552,10);
 	cases(278,552,333,600,19);
@@ -67,6 +66,7 @@ void Game::init_cases(){
 	cases(424,240,482,282,11);
 }
 
+//Constructeur
 Game::Game(std::size_t t){
 	this->tours=t;
 	this->window.create(sf::VideoMode(1600, 1000), "Last Earth");
@@ -76,7 +76,6 @@ Game::Game(std::size_t t){
 	//Villageois et ressources de base
 	H.push_back(Hommes());
 	F.push_back(Femmes());
-	V.push_back(Viande());
 	V.push_back(Viande());
 	E.push_back(Eau());
 	E.push_back(Eau());
@@ -89,17 +88,24 @@ Game::Game(std::size_t t){
 
 void Game::recolter(){
 	std::size_t r;
-	//récolter les ressources de la case, une fois récoltés la case ne contient plus de ressources
+	//récolter les ressources de la case, une fois récoltée, la case ne contient plus de ressources
 	//refaire pour obtenir 2 ressources
+
 	for(std::size_t i=0;i<C.size();i++){
+
 		if(j.getX()>=C[i].getX1() && j.getX()<=C[i].getX2() && j.getY()>= C[i].getY1() && j.getY()<= C[i].getY2()){
-			//on ne récolte pas si la case a déjà été visitée. 
+			//on ne récolte pas si la case a déjà été visitée.
+
+			//on affiche ce que contient la case 
+			std::cout << C[i]<< std::endl;
+
+			//selon ce qu'on contient la case on ajoute à la bonne liste la ressource
 			for(std::size_t j=0;j<C[i].Size_R();j++){
 				r=C[i].getTypeR(j);
 				switch(r){
 					case 0:
 						L.push_back(Legumes());
-						printf("legumes : %d\n",L.size() );
+						printf("Legumes : %d\n",L.size() );
 						break;
 					case 1:
 						V.push_back(Viande());
@@ -126,7 +132,23 @@ void Game::recolter(){
 		}
 	}
 
+}
 
+//fonction de fin de reproduction
+bool Game::repro_fin(){
+    sleep(2);
+    //on compte les morts après la repro
+    mourir();
+    return false;
+}
+
+bool Game::recolte_direction(int a,int b){
+    	j.setX(j.getX()+a);
+    	j.setY(j.getY()+b);
+    	j.newPosition();
+    	recolter();
+    	recolter();
+    	return true;
 }
 
 void Game::show(){
@@ -134,8 +156,8 @@ void Game::show(){
 	sf::Texture texture;
 	sf::Texture texture2;
 	sf::Texture texture3;
-	sf::Texture texture4;
-	sf::Texture texture5; //0.png
+	sf::Texture texture4; //0
+	sf::Texture texture5; //1.png
 	sf::Texture texture6; // 2.Png
 	sf::Texture texture7;
 	sf::Texture texture8;//3
@@ -145,13 +167,15 @@ void Game::show(){
 	sf::Texture texture12; //7
 	sf::Texture texture13; //8
 	sf::Texture texture14; //9
-	sf::Texture texture_feed;
-	sf::Texture yes;
-	sf::Texture no;
+	sf::Texture texture_feed; //bouton bleu 
+	sf::Texture yes; //bouton oui
+	sf::Texture no; //bouton non
 	sf::Texture regles;
+
 
 	std::size_t i = 1;
 	std::size_t tour =0; //compteur de tours
+	//permet de récupérer le bon sprite quand on update les listes et les vecteurs
 	std::string chemin="Carte/fd/";
 	std::string ext=".png";
 	std::string numero;
@@ -160,6 +184,7 @@ void Game::show(){
 	std::string chemin2;
 	std::string nomComplet2;
 
+	//Sprites
 	sf::Sprite s;
 	sf::Sprite button;
 	sf::Sprite s2;
@@ -179,6 +204,7 @@ void Game::show(){
 	sf::Sprite yes_button;
 	sf::Sprite no_button;
 
+	//Initialisation Sprites & Textures
     texture.loadFromFile("Carte/fd/1.png");
     s.setTexture(texture);
     s.setScale(0.62f,0.55f);
@@ -238,6 +264,7 @@ void Game::show(){
    	V5.setScale(1.5f,1.5f);
    	V5.setPosition(1688,636);
 
+   	//booléen pour découper le tour en plusieurs parties
 	bool flag_escape = false;
 	bool flag_debut = true;
 	bool flag_end = false;
@@ -246,7 +273,7 @@ void Game::show(){
 	bool flag_reproduction = false;
 	bool repro = false;
 	
-
+	//permet d'utiliser correctement la fonction reproduction
 	std::size_t p1 = 0;
 	std::size_t p2 = 0;
 
@@ -258,12 +285,14 @@ void Game::show(){
    		while (this->window.pollEvent(event))
    		{
    			switch (event.type){
-		  
+		  		
+		  		//permet de fermer la fenêtre
        			case sf::Event::Closed :
            			this->window.close();
            			break;
 
            		case sf::Event::MouseButtonPressed :
+
            			//appuyer sur le bouton planète sur l'écran de pause
            			if(flag_escape == true){
            				if(event.mouseButton.x < 875 && event.mouseButton.x>726 && event.mouseButton.y < 686 && event.mouseButton.y > 521){
@@ -271,6 +300,7 @@ void Game::show(){
            				}
            			
            			}
+           			//appuyer sur le bouton bleu pour consommer les ressources
            			if(flag_feed == true){
            				if(event.mouseButton.x <938 && event.mouseButton.x >752 && event.mouseButton.y <412 && event.mouseButton.y >245){
            					consomme();
@@ -278,51 +308,35 @@ void Game::show(){
            					flag_reproduction = true;
            				}
            			}
+           			//appuyer sur le petit bouton bleu pour oui et le petit bouton rouge pour non
            			if(flag_reproduction == true && repro == false){
+           				//bouton oui
            				if(event.mouseButton.x <736 && event.mouseButton.x >647 && event.mouseButton.y <622 && event.mouseButton.y >530){
-           					//bouton yes
-           					//la reproduction prend une ration de bois ou de pierre (pour agrandir le village)
-
+           					
            					if(P.size()>0 || B.size()>0){
 
-           						//on utilise une ressource et on appuie sur deux personnages différents
-           						//on vérifie si on au moins 2 personnages (et si il ne reste que des humains deux humains de sexe différent)
+           						//on appuie sur deux personnages différents
+           						//on vérifie si on a au moins 2 personnages
            						if(repro_ok()){
-           							//ok théoriquement on peut faire la repro
            							repro = true;
-
            						}
            						else{
            							std::cout << "Reproduction fail : pas assez de villageois"<<std::endl;
-           							flag_reproduction = false;
-           							sleep(2);
-           					//on compte les morts après la repro
-           							mourir();
+           							flag_reproduction = repro_fin();
            						}
            					}
            					else{
            						std::cout << "Reproduction fail : pas assez de bois ou de pierre"<<std::endl;
-           						flag_reproduction = false;
-           						sleep(2);
-           					//on compte les morts après la repro
-           						mourir();
+           						flag_reproduction = repro_fin();
            					}
-           					//flag_reproduction = false;
-           					//sleep(2);
-           					//on compte les morts après la repro
-           					//mourir();
            				}
+           				//Bouton non
            				if(event.mouseButton.x <1092 && event.mouseButton.x >997 && event.mouseButton.y <627 && event.mouseButton.y >524){
-           					//bouton no
-           					flag_reproduction = false;
-           					sleep(2);
-           					mourir();
+           					flag_reproduction = repro_fin();
            				}
-
-           				
            			}
            			if(repro == true){
-
+           				// On choisit nos deux personnages
            				if(p1 == 0){
 
            				if(H.size()>0){
@@ -398,22 +412,20 @@ void Game::show(){
            					P.pop_back();
            				}*/
            				//remise à la normale des flags
-           				sleep(2);
-           				mourir();
-           				flag_reproduction = false;
+           				
+           				flag_reproduction = repro_fin();
            				repro = false;
            				p1 = 0;
            				p2 = 0;
 
-           				//a completer
 
            			}
 
-           			}
-           			//pour les tests
-           			std::cout << "mouse x: " << event.mouseButton.x << std::endl;
-        			std::cout << "mouse y: " << event.mouseButton.y << std::endl;
-           			break;
+           		}
+           		//pour les tests
+           		//std::cout << "mouse x: " << event.mouseButton.x << std::endl;
+        		//std::cout << "mouse y: " << event.mouseButton.y << std::endl;
+           		break;
            }
 
            if (event.type == sf::Event::KeyPressed && flag_feed == false && flag_reproduction == false && repro == false){
@@ -424,109 +436,79 @@ void Game::show(){
     				flag_escape = true;
     			}
     		}
-
+    		//récolte et mouvement
 
     		if (event.key.code == sf::Keyboard::Z){
-    			if(i<8){
-    				i++;
-    			}
-    			j.setX(j.getX()-12);
-    			j.setY(j.getY()-38);
-    			j.newPosition();
-    			recolter();
-    			flag_feed = true;
+    			
+    			flag_feed = recolte_direction(-12,-38);
+    			if(i<8){i++;}
     			tour++;
 
     		}
     		if (event.key.code == sf::Keyboard::E ){
-    			if(i<8){
-    				i++;
-    			}
-    			j.setX(j.getX()+45);
-    			j.setY(j.getY()-40);
-    			j.newPosition();
-    			recolter();
-    			flag_feed = true;
+
+    			flag_feed = recolte_direction(+45,-40);
+    			if(i<8){i++;}
     			tour++;
     		}
     		if (event.key.code == sf::Keyboard::D ){
-    			if(i<8){
-    				i++;
-    			}
-    			j.setX(j.getX()+75);
-    			j.setY(j.getY()+10);
-    			j.newPosition();
-    			recolter();
-    			flag_feed = true;
+
+    			flag_feed = recolte_direction(75,10);
+    			if(i<8){i++;}
     			tour++;
     		}
     		if (event.key.code == sf::Keyboard::X ){
-    			if(i<8){
-    				i++;
-    			}
-    			j.setX(j.getX()+45);
-    			j.setY(j.getY()+40);
-    			j.newPosition();
-    			recolter();
-    			flag_feed = true;
+    			flag_feed = recolte_direction(45,40);
+    			if(i<8){i++;}
     			tour++;
 
     		}
     		if (event.key.code == sf::Keyboard::W ){
-    			if(i<8){
-    				i++;
-    			}
-    			j.setX(j.getX()-5);
-    			j.setY(j.getY()+50);
-    			j.newPosition();
-    			recolter();
-    			flag_feed = true;
+    			flag_feed = recolte_direction(-5,50);
+    			if(i<8){i++;}
     			tour++;
     		}
     		if (event.key.code == sf::Keyboard::Q ){
+
+    			flag_feed = recolte_direction(-40,0);
     			if(i<8){i++;}
-    			j.setX(j.getX()-40);
-    			j.setY(j.getY()+0);
-    			j.newPosition();
-    			recolter();
-    			flag_feed = true;
     			tour++;
 
     		}
 
 		}
 
+	}
+	//plus de personnages à jouer -> on perd
+	if(H.size()==0 && F.size()==0 && PM.size()==0 && F_minus.size()==0 && F_plus.size()==0){
+		flag_end = true;
+		win = false;
+	}
+	//fin du jeu si le nombre de tours est passé
+	if(tour > tours){
+		flag_end = true;
 
 	}
-		//plus de personnages à jouer
-		if(H.size()==0 && F.size()==0 && PM.size()==0 && F_minus.size()==0 && F_plus.size()==0){
-			flag_end = true;
-			win = false;
-		}
-		//fin du jeu
-		if(tour > tours){
-			flag_end = true;
-
-		}
 
 	if(flag_debut == true){
-	flag_debut = false;
-	window.draw(s);
-    window.draw(s2);
-    window.draw(s3);
-    window.draw(j.getSprite());
-    window.draw(sH);
-    window.draw(sF);
-    window.draw(sMpm);
-    window.draw(sMminus);
-    window.draw(sMplus);
-    window.draw(V1);
-    window.draw(V2);
-    window.draw(V3);
-    window.draw(V4);
-    window.draw(V5);
+		flag_debut = false;
+		window.draw(s);
+	    window.draw(s2);
+	    window.draw(s3);
+	    window.draw(j.getSprite());
+	    window.draw(sH);
+	    window.draw(sF);
+	    window.draw(sMpm);
+	    window.draw(sMminus);
+	    window.draw(sMplus);
+	    window.draw(V1);
+	    window.draw(V2);
+	    window.draw(V3);
+	    window.draw(V4);
+	    window.draw(V5);
     
-    this->window.display();}
+       this->window.display();
+    }
     else if (flag_escape == false && flag_end == false){
 		numero=std::to_string(i);
 		nomComplet=chemin+numero+ext;
@@ -610,18 +592,17 @@ void Game::show(){
     	window.draw(s2);
     	window.draw(s3);
     	window.draw(j.getSprite());
+	    window.draw(sH);
+	    window.draw(sF);
+	    window.draw(sMpm);
+	    window.draw(sMminus);
+	    window.draw(sMplus);
+	    window.draw(V1);
+	    window.draw(V2);
+	    window.draw(V3);
+	    window.draw(V4);
+	    window.draw(V5);
 
-
-    window.draw(sH);
-    window.draw(sF);
-    window.draw(sMpm);
-    window.draw(sMminus);
-    window.draw(sMplus);
-    window.draw(V1);
-    window.draw(V2);
-    window.draw(V3);
-    window.draw(V4);
-    window.draw(V5);
     if(flag_feed == true){
    			texture_feed.loadFromFile("Assets_visuels/water.png");
    			feed_button.setTexture(texture_feed);
@@ -679,6 +660,8 @@ void Game::show(){
     	this->window.display();
 		
 	}
+
+	//fin du jeu
 	else if(flag_end == true){
 		if(win == true){
 			texture.loadFromFile("Assets_visuels/ecran_end_win.png");
@@ -699,14 +682,30 @@ void Game::show(){
 
 	}
 	
-	}	
+}	
 	
 }
 
+//fonction de consommation des ressources alimentaires incluant tous les personnages
 void Game::consomme(){
-	std::size_t x = rand()%3+1;
+
 	//les humains ne consomment que les ressources alimentaires
-	for(std::size_t i=0;i<H.size();i++){
+
+	consomme_H();
+	consomme_F();
+	consomme_pm();
+	consomme_Fminus();
+
+	for(std::size_t i=0;i<F_plus.size();i++){
+		F_plus[i].Perdre_vie();
+		//les mutants_plus ne peuvent pas mourir sans ressources, ils ne font que perdre de la vie
+	}
+
+}
+
+//fonction de consommation des hommes
+void Game::consomme_H(){
+		for(std::size_t i=0;i<H.size();i++){
 		H[i].Perdre_vie();
 		if(E.size()==0 && V.size()==0 && L.size()==0){
 			H[i].setVivant(false); //mort de faim 
@@ -721,9 +720,11 @@ void Game::consomme(){
 		else if(E.size()>0){
 			E.pop_back();
 		}
-
-
 	}
+}
+
+//fonction de consommation des femmes
+void Game::consomme_F(){
 	for(std::size_t i=0;i<F.size();i++){
 		F[i].Perdre_vie();
 		if(E.size()==0 && V.size()==0 && L.size()==0){
@@ -741,10 +742,14 @@ void Game::consomme(){
 		
 
 	}
+
+}
+//fonction de consommation mutants_pm
+void Game::consomme_pm(){
 	for(std::size_t i=0;i<PM.size();i++){
 		PM[i].Perdre_vie();
-		//les mutants pm peuvent consommer n'importe quelle ressource (bois et pierre incluses)
-		//ils consomment de préférence les mêmes ressources que les humains mais peuvent survivre uniquement de ressources alimentaires
+		//les mutants_pm peuvent consommer n'importe quelle ressource (bois et pierre incluses)
+		//ils consomment de préférence les mêmes ressources que les humains mais peuvent survivre uniquement de ressources non alimentaires
 		if(E.size()==0 && V.size()==0 && L.size()==0 && B.size()==0 && P.size()==0){
 			PM[i].setVivant(false); //mort de faim 
 		}
@@ -765,9 +770,13 @@ void Game::consomme(){
 		}
 
 	}
+}
+//fonction de consommation des mutantsF_minus
+//Les mutants F_minus consomment 2 ressources et peuvent consommer les 5 types de ressources
+void Game::consomme_Fminus(){
 	for(std::size_t i=0;i<F_minus.size();i++){
 		F_minus[i].Perdre_vie();
-		//les mutants F_minus doivent consommer deux ressources (peu importe la ressource à chaque tour)
+		
 		if(E.size()==0 && V.size()==0 && L.size()==0 && B.size()==0 && P.size()==0){
 			F_minus[i].setVivant(false); //mort de faim 
 		}
@@ -791,19 +800,14 @@ void Game::consomme(){
 			P.pop_back();
 			P.pop_back();
 		}
-		
-
+	
 	}
-	for(std::size_t i=0;i<F_plus.size();i++){
-		F_plus[i].Perdre_vie();
-		//les mutants_plus ne peuvent pas mourir sans ressources, ils ne font que perdre de la vie
-	}
-
 
 }
 
+//fonction qui permet d'enlever les personnages morts à ce tour
 void Game::mourir(){
-	//vérifier qui est mort en fin de tour
+	
 	for(std::size_t i=0;i<H.size();i++){
 		if(H[i].getVivant()==false){
 			H.pop_back();
@@ -837,6 +841,7 @@ void Game::mourir(){
 
 }
 
+//Fonction qui permet de vérifier si la reproduction est possible
 bool Game::repro_ok(){
 	if((H.size()+PM.size()+F_minus.size()+F_plus.size())>1){
 		return true;
@@ -853,6 +858,7 @@ bool Game::repro_ok(){
 	}
 }
 
+//fonction qui permet de retourner un personnage en entrant son numéro de type
 Personnage& Game::return_perso(std::size_t t){
 	if(t ==1){
 		Hommes hom;
@@ -881,21 +887,27 @@ Personnage& Game::return_perso(std::size_t t){
 	}
 }
 
+//sortir le personnage de la liste lorsqu'il meurt 
 void Game::push_list(std::size_t t){
 	if(t ==1){
 		H.push_back(Hommes());
+		std::cout << H<<std::endl;
 	}
 	else if(t ==2){
 		F.push_back(Femmes());
+		std::cout << F << std::endl;
 	}
 	else if(t ==3){
 		PM.push_back(Mutants_pm());
+		std::cout << PM << std::endl;
 	}
 	else if(t ==4){
 		F_plus.push_back(MutantsF_plus());
+		std::cout << F_plus << std::endl;
 	}
 	else if(t ==5){
 		F_minus.push_back(MutantsF_minus());
+		std::cout << F_minus << std::endl;
 	}
 
 }

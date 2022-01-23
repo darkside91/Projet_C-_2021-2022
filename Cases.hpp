@@ -17,8 +17,8 @@ class Cases{
 		const std::size_t getY1(){return y1;}
 		const std::size_t getX2(){return x2;}
 		const std::size_t getY2(){return y2;}
-		const Ressources& getR1(){return R[0];}
-		const Ressources& getR2(){return R[1];}
+		Ressources& getR(std::size_t i){return R[i];}
+
 		std::size_t getTypeR(std::size_t i);
 		std::size_t Size_R(){return R.size();}
 		void erase_r(std::size_t i){R.erase(R.begin()+i);}
@@ -35,3 +35,5 @@ class Cases{
 
 
 };
+
+std::ostream& operator<< (std::ostream& out, Cases& c);

@@ -9,6 +9,7 @@ class Pierre:public Ressources{
 	public:
 		
 		Pierre(){this->setType(3);}
+	
 
 	private:
 

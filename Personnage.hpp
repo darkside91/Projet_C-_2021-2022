@@ -11,6 +11,7 @@ class Personnage{
 	public:
 
 		void setVie(std::size_t i){Vie = i;}
+		const std::size_t getVie(){return Vie;}
 
 		virtual Personnage& reproduction(Personnage& p) = 0;
 		virtual bool choisir(std::size_t x,std::size_t y) =0;
@@ -19,6 +20,7 @@ class Personnage{
 		const std::size_t getType_r(){return Type_r;}
 		const std::size_t getType_perso(){return type_perso;}
 		void setType_perso(std::size_t i){type_perso = i;}
+		std::string str(std::size_t t);
 		const bool getBool(){return femme;}
 		void setFemme(bool f){femme=f;}
 		const bool getVivant(){return vivant;}
@@ -36,8 +38,6 @@ class Personnage{
 		bool vivant;
 
 
-		
-		
-
-
 };
+
+

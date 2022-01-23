@@ -10,6 +10,7 @@ class Ressources{
 		
 		const std::size_t getType(){return type;}
 		void setType(std::size_t i){type = i;}
+		std::string str();
 
 	private:
 		
