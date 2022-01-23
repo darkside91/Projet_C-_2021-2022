@@ -32,7 +32,7 @@ class Game{
 		std::vector<Mutants_pm> PM;
 		std::vector<MutantsF_minus> F_minus;
 		std::vector<MutantsF_plus> F_plus;
-		
+
 		//listes de chaque type de ressources
 		std::list<Eau> E;
 		std::list<Bois> B;
@@ -54,6 +54,7 @@ class Game{
 		void mourir();
 		bool repro_ok();
 		void push_list(std::size_t t);
+		const std::size_t getTours(){return tours;}
 		Personnage& return_perso(std::size_t t);
 		Ressources& rand_ressources();
 };

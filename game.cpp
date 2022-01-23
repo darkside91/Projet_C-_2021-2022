@@ -12,6 +12,7 @@ Ressources& Game::rand_ressources(){
 	Pierre d;
 	Pierre& P = d;
 	Bois e;
+	
 	Bois& R = e;
 
 	switch(x)
