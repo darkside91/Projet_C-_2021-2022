@@ -41,14 +41,14 @@ TEST_CASE("3: Game","[return_perso]"){
 //Vérifie si la reproduction() fonctionne
 TEST_CASE("4: Hommes","[reproduction]"){
   Hommes h;
-  Femmes f;
   //pour cela il faut vérifier qu'on renvoie bien un personnage
   Femmes f2;
+  Personnage& p2 = f2.reproduction(h);
+  Personnage& p = f2;
+  const type_info& ti = typeid(&p);
+  const type_info& ti2 = typeid(&p2);
 
-  Personnage* p = dynamic_cast<Personnage*>(&f2);
-  Femmes* f3 = dynamic_cast<Femmes*>(p);
-  // si le pointeur n'est pas nul c'est que le dynamic cast s'est fait correctement
-  REQUIRE(f3 != nullptr);
+  REQUIRE(ti == ti2);
 }
 
 //vérifie l'iniatilisation des personnages et la perte de vie
